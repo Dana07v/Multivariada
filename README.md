@@ -1,2 +1,2 @@
 # Multivariada
-Repositorio con los trabajos de estadistica dexriptiva multivariada 
+Repositorio con los trabajos de estadistica descriptiva multivariada 
