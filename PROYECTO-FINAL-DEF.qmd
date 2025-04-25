@@ -1,0 +1,1717 @@
+---
+title: "Proyecto EDM"
+author: "Juan Camilo Suarez Ramirez - Dana Valeria Garcia Castiblanco"
+format: html
+toc: true
+toc-title: Contenido
+code-fold: true
+code-tools: true
+editor: visual
+theme: 
+  light: flatly
+  dark: darkly
+---
+
+## Resumen
+
+La intención es proporcionar información detallada acerca del dataset *SUPPORT2* basándose en un estudio analítico, descriptivo y exploratorio para intentar otorgar argumentos al lector sobre pacientes gravemente enfermos hospitalizados empleando herramientas dadas en la clase de Estadística Descriptiva Multivariada.
+
+Se busca con esta investigación identificar las variables asociadas que sean causas relevantes en la mortalidad de estos pacientes hospitalizados en estado crítico además de implementar detalles que promuevan más estudios de este tipo para así crear una vorágine de información útil para investigadores, estudiantes, profesionales o curiosos que deseen aprendizaje constante y ocasionen como resultado una mejora en la calidad de vida para personas necesitadas de ayuda.
+
+Se usará el conjunto de datos *SUPPORT2*, este dataset posee información acerca de 9100 pacientes en estado crítico en 5 centros médicos de Estados Unidos entre el periodo de 1989-1994, además es una base de datos con más observaciones y variables que *SUPPORT* ; por lo que se puede decir que es una recopilación evolucionada, ya que recaba más datos que la primera versión.
+
+## Planteamiento de problema de investigación
+
+Los pacientes hospitalizados en estado crítico representan un grupo vulnerable que requiere atención médica intensiva. Identificar los factores asociados con la mortalidad en este grupo de pacientes es crucial para mejorar los protocolos de tratamiento y la calidad de la atención médica.
+
+Con base en esto, la incógnita que se presenta es: ¿La muerte es el resultado que se espera para todos los pacientes internados, siendo la comorbilidad el aspecto relevante de la investigación o los factores estudiados justificaran más resultados de supervivencia?
+
+Se espera poder concluir información detallada que responda las problemáticas anteriores.
+
+## Marco Conceptual
+
+En esta investigación, se utilizará un enfoque multivariado para explorar los determinantes con base en la información de estos usuarios.
+
+Se analizarán categorías que deberían justificar los casos de hospitalización, pero también se espera concluir factores inesperados que otorguen aspectos de interés al lector.
+
+Un estudio con personas enfermas influye en las emociones de los investigadores porque tratar con vidas humanas exige un respeto y un sentido ético congruente con la magnitud de la información que se tiene.
+
+### Marco de Antecedentes
+
+Existe un conjunto de datos llamado "SUPPORT" el cual contenía una muestra aleatoria con información sobre 1000 pacientes en hospitales. Se realizó un estudio para comprender y analizar un modelo que estimara la supervivencia durante un periodo de 6 meses para adultos hospitalizados gravemente enfermos.
+
+El proyecto "SUPPORT" tenía como objetivo mejorar la toma de decisiones para abordar la creciente preocupación nacional sobre la pérdida de control de los pacientes cerca del final de la vida y reducir la frecuencia de un proceso doloroso y prolongado de morir. Este conjunto de datos consistió en un estudio observacional prospectivo de dos años (Fase I), seguido de un ensayo clínico controlado de otros dos años (Fase II). La Fase I recopiló datos de pacientes durante 1989-1991 para caracterizar la atención, las preferencias de tratamiento y los patrones de toma de decisiones entre pacientes críticamente enfermos, mientras que la Fase II implementó una intervención que proporcionaba información predictiva precisa a los médicos sobre la capacidad funcional futura, la probabilidad de supervivencia a seis meses y las preferencias de cuidados al final de la vida de los pacientes, además de asignar una enfermera capacitada como parte de la intervención. La investigación recopiló datos mediante cuestionarios administrados a pacientes, sus representantes y médicos, junto con revisiones de historias clínicas. Los pacientes fueron seguidos durante seis meses en "SUPPORT" utilizando el National Death Index para identificar muertes hasta 1997.
+
+En la presente investigación se concluye que una cantidad limitada de información clínica fácilmente disponible puede proporcionar una base para estimaciones de supervivencia a largo plazo que sean tan precisas como aquellas dadas por los especialistas encargados.
+
+Por otra parte, existe otro conjunto de datos llamado "HELP" el cual se llevó a cabo en 1993 simultáneamente con la fase final del estudio "SUPPORT" resaltando su uso de los datos recolectados para caracterizar la atención recibida, además de preferencias de tratamiento y los patrones de toma de decisiones entre los pacientes hospitalizados que tenían al menos 80 años de edad.
+
+La información de "HELP" también estaba destinada a ser utilizada en la adaptación de la mortalidad en Modelos de estado funcional de pacientes ancianos; los datos obtenidos de "HELP" eran esencialmente los mismos que los de "SUPPORT".
+
+Los pacientes dentro del estudio "HELP" fueron seguidos durante 12 meses después de la inclusión en el estudio. Pacientes que no murieron en el plazo de un año o aquellos a los cuales se les perdió seguimiento se compararon con el Índice Nacional de Mortalidad para Identificar las muertes hasta 1997 siendo una investigación usada para verificar las justificaciones en la alta mortalidad dada en la época y poder ofrecer al público herramientas para disminuir estos casos en un futuro.
+
+### Marco Teorico
+
+Algunas definiciones y características del estudio a tener en cuenta:
+
+-   *Índice de Actividades de Vida Diaria(AVD)* : Se emplea la herramienta del Índice de Katz el cual se trata de un instrumento para evaluar la independencia de un enfermo en cuanto a la realización de las actividades básicas de la vida diaria. Se evalúan los ítems de (Baño, Vestido, Uso del WC, Movilidad, Continencia, Alimentación) y luego se califica con los valores 0-7 siendo 7 la independencia en todo y 0 dependientes.
+
+-   *Índice Nacional de Muerte(NDI)* : Es un recurso de EE. UU. disponible para los investigadores del Centro Nacional de Estadísticas de Salud de los Estados Unidos para obtener el estado de muerte o la causa de la muerte de ciudadanos que ocurren dentro de este país.
+
+-   *Microcosteo*: Es una metodología de estimación de costos que emplea datos detallados sobre la utilización de recursos y los costos unitarios para generar estimaciones precisas de los costos económicos gastados por un paciente en un hospital.
+
+-   *RCC costo*: Es un índice costo-cargo, en el contexto de salud y medicina, este índice se utiliza principalmente para evaluar la relación entre los costos incurridos y los cargos facturados en servicios hospitalarios, tanto para pacientes hospitalizados como ambulatorios.
+
+-   *Sistema de Puntuación de intervenciones Terapéuticas (TISS)*: Es una herramienta utilizada en unidades de cuidados intensivos (UCI) y unidades de cuidados intermedios (IMCU) para cuantificar el tipo y la cantidad de tratamientos intensivos proporcionados a los pacientes.
+
+-   *mmHg*: Unidad de medida de presión arterial.
+
+-   *Glóbulos Blancos*: Se miden en miles por milímetro cúbico y un rango normal está situado entre 4500-11000.
+
+-   *Frecuencia Cardiaca*: Es el número de veces que se contrae el corazón durante 60 segundos y la frecuencia normal en reposo oscila entre 50 y 100 latidos por minuto.
+
+-   *Frecuencia Respiratoria*: Es el número de respiraciones que realiza un ser vivo en un periodo específico y la frecuencia respiratoria normal en reposo es de 12-15 respiraciones/min.
+
+-   *Hipoxemia*: Bajo nivel clínico de oxígeno en la sangre.
+
+-   *Indicador Clínico de Hipoxemia*: Mide la relación entre la presión parcial de oxígeno arterial (PaO2) y la fracción de oxígeno inspirado (FiO2).
+
+-   *Seroalbúmina*: Es una de las proteínas más importante del plasma de la sangre. Las concentraciones bajas de esta sustancia se presentan en las personas que padecen de malnutrición, inflamación y enfermedades graves del hígado y el riñón. Se considera un rango normal entre 3.4 a 5.4 g/L.
+
+-   *Bilirrubina*: Es una sustancia amarillenta que se forma durante el proceso normal de descomposición de los glóbulos rojos viejos por el cuerpo. La bilirrubina se encuentra en la bilis, un líquido segregado por el hígado que ayuda a digerir los alimentos. Posee un valor normal de 0,3 a 1,0 mg/dL.
+
+-   *Creatinina*: Se trata de un producto de desecho del metabolismo normal de los músculos que habitualmente produce el cuerpo en una tasa muy constante (dependiendo de la masa de los músculos), y que normalmente filtran los riñones excretándola en la orina. Un resultado normal es de 0.7 a 1.3 mg/dL (de 61.9 a 114.9 µmol/L) para los hombres y de 0.6 a 1.1 mg/dL (de 53 a 97.2 µmol/L) para las mujeres.
+
+-   *Sodio Sérico*: Es un examen que mide la concentración de sodio en la sangre. Y el rango normal para los niveles de sodio en la sangre es de 135 a 145 mili equivalentes por litro (mEq/L).
+
+-   *pH*: El examen busca medir la acidez en la sangre, junto con la cantidad de oxígeno y de dióxido de carbono presente en la sangre. Los valores normales pH de sangre arterial son: 7.38 a 7.42.
+
+-   *Nitrógeno Ureico*: Este examen en la sangre (NUS) brinda información importante sobre el funcionamiento de los riñones. La función principal de los riñones es eliminar los productos de desecho y el exceso de líquido del cuerpo. Se miden en miligramos por decilitro (mg/dl) en Estados Unidos y en milimoles por litro (mmol/l) en todo el mundo. En general, un nivel de aproximadamente 6 a 24 mg/dl (de 2,1 a 8,5 mmol/l) se considera normal.
+
+-   *Prueba Orina*: Se realiza para chequear si hay una infección de las vías urinarias, problemas renales o diabetes; En general, los valores normales para la densidad de la orina es 1.005 a 1.030.
+
+-   *sps*: Puntuación de fisiología dada por un modelo de pronóstico del dataset "SUPPORT".
+
+-   *Apache III*: La puntuación APACHE III consta de varias partes, los cuales incluyen el motivo principal de ingreso a la UCI, edad, sexo, raza, comorbilidades preexistentes y ubicación antes del ingreso a la UCI (10). El rango de puntuación APACHE III es de 0 a 299 puntos.
+
+-   *Discapacidad Funcional*: Se refiere a la pérdida o limitación de alguna persona para moverse o realizar actividades físicas, se mide de 1-5 según su gravedad.
+
+-   *Perfil Impacto de enfermedad (SIP)*: Es una medida del estado de salud basada en el comportamiento desarrollada en 1972, se utiliza para evaluar la percepción de una persona sobre su estado de salud con respecto al impacto de su enfermedad; su metodología es por medio de cuestionarios.
+
+-   *Diabetes*: Enfermedad causada por exceso de azúcar en la sangre.
+
+-   *Comorbilidad*: Presencia de dos o más enfermedades al mismo tiempo en una persona. También se llama morbilidad asociada.
+
+-   *Demencia*: Es un síndrome que puede deberse a una serie de enfermedades que, con el tiempo, destruyen las células nerviosas y dañan el cerebro, lo que generalmente conduce al deterioro de la función cognitiva. Empeora con el tiempo y afecta principalmente a las personas de edad.
+
+-   *Cáncer*: Es una enfermedad en la que algunas células del cuerpo se multiplican sin control y se diseminan a otras partes del cuerpo.
+
+-   *Metástasis*: Es el proceso de propagación de un foco cancerígeno a un órgano distinto de aquel en que se inició.
+
+-   *Orden de no Reanimación (DNR)*: Tipo de instrucción por adelantado en la que una persona indica a los proveedores de atención de la salud que no deben iniciar reanimación cardio pulmonar (hacer que el corazón vuelva a funcionar) si se detiene el corazón o si la persona deja de respirar.
+
+-   *ARF*: Ablación(quitar cualquier órgano, tumor o parte del cuerpo mediante una operación quirúrgica) por radiofrecuencia (ARF) es un tratamiento para algunos tumores, con mayor frecuencia los que se encuentran en el hígado, los pulmones y los riñones; también se puede utilizar en algunos tumores de mama y hueso.
+
+-   *MOSF(Falla sistemática múltiple en órganos)*: Falla procedural en los órganos de todo el cuerpo y, por lo tanto, es causa fatal que provoca mortalidad.
+
+-   *(EPOC)Enfermedad pulmonar obstructiva crónica*: Es una enfermedad prevenible y tratable caracterizada por una limitación crónica al flujo aéreo que puede ser fatal.
+
+-   *Insuficiencia Cardiaca Congestiva(CHF)*: Es una afección en la cual el corazón ya no puede bombear sangre rica en oxígeno al resto del cuerpo de forma eficiente.
+
+-   *Cirrosis*: Es un conjunto de cicatrices en el hígado. El tejido cicatricial se forma por lesiones o enfermedades prolongadas. Este tejido no puede hacer lo que hace el tejido hepático sano: producir proteínas, ayudar a combatir las infecciones, limpiar la sangre, ayudar a digerir los alimentos y almacenar energía.
+
+-   *Coma*: Es un estado profundo de inconsciencia. Una persona en coma está viva pero incapaz de moverse o responder a su entorno. El estado de coma se puede presentar como una complicación de una enfermedad subyacente o como resultado de lesiones, tales como traumatismo del cráneo.
+
+-   *Escala de Glasgow*: Es una escala de aplicación neurológica que permite medir el nivel de conciencia de una persona. Una exploración neurológica de un paciente con traumatismo craneoencefálico debe ser simple, objetiva y rápida; utiliza 3 parámetros que son respuesta verbal, ocular y motora y los resultados se pueden categorizar en leve, moderado y grave.
+
+-   *Estimación de Supervivencia*: Se refiere a una valoración a base de recopilaciones de información anteriores sobre personas que sobreviven a un determinado tipo de enfermedad durante un período específico y se calcula como el cociente entre el número de pacientes que quedan vivos al final del intervalo (o que no experimentaron el suceso) entre el promedio del número de pacientes vivos durante dicho intervalo.
+
+## Análisis univariado
+
+```{r, include=FALSE}
+library(readr)
+library(plotly)
+library(ggplot2)
+library(FactoClass)
+library(dplyr)
+library(sqldf)
+library(knitr)
+library(gridExtra)
+library(RColorBrewer)
+library(sqldf)
+```
+
+```{r, output=FALSE}
+datos <- read_csv("datos.csv")
+
+categoricas <- c("death","sex","hospdead","dzgroup","dzclass","income","race","ca","dnr","sfdm2","diabetes","dementia","num.co",
+                 "scoma")
+
+datos[, categoricas] <- lapply(datos[, categoricas], factor)
+coul <- brewer.pal(11, "Set3")
+```
+
+La base de datos tiene una cantidad de 1905 individuos con 48 variables inicialmente, de estas la primera de ellas era un identificador para el paciente, el cual no será tomado en cuenta, por lo que tenemos 46 variables a trabajar, de las cuales 15 son categorías (puesto que la variable *dzclass* y *dzgroup* contienen la misma información) y 31 cuantitativas. En cuanto a los valores faltantes de la base de datos, se tiene la siguiente información:
+
+```{r}
+missings <- function(x) return(sum(is.na(x)))
+apply(datos,2,missings)
+```
+
+Al existir datos faltantes en algunas variables se desea realizar un filtro para poder utilizar solo aquellas variables que posean completos en todas sus filas pero dependerá de las proximas entregas confirmar esta intención.
+
+En un primer instante, podemos dividir estas 47 variables en 4 grandes grupos, siendo esta Salud y Demografía, Exámenes, Enfermedades, Seguimiento de casos.
+
+### Salud y Demografía
+
+Se reúnen aquí 11 variables de tipo tanto cualitativo como cuantitativo.
+
+-   Edad medida como una variable continua.(*Age*)
+-   Género del paciente (*sex*)
+-   Raza (*race*)
+-   Años de Educación considerada como una variable continua (*edu*)
+-   Ingresos del paciente, una variable categórica, donde medida dada en miles de dólares.(*income*)
+-   Muertes de los individuos seguidos teniendo en cuenta los registros médicos. (*death*)
+-   Muerto en el hospital (*hospdead*)
+-   Cargos Médicos (*charges*)
+-   Relación costos-cargo (*totcst*)
+-   Microcosto total(*totmcst*)
+-   Puntuación promedio de TISS (*avtisst*)
+
+```{r}
+variables <- c("sex", "race", "income", "death", "hospdead")
+var2 <- c("age", "edu", "avtisst")
+var3 <- c("charges","totcst", "totmcst")
+par(las =3, mfrow=c(3,3), mai=c(0.6,0.5,0.2,0.1))
+for (variable in variables) {
+  conteo <- table(datos[[variable]])
+  text(x = barplot(conteo, col = coul, main = variable), y = conteo, labels = conteo, pos = 3, cex = 0.8, col = "blue")
+  xlab=colnames(datos[[variable]])
+}
+for(i in var2){
+  hist(datos[[i]], main=i, xlab=i, col = "darkslategray3")
+}
+par(mfrow=c(2,3), mai=c(0.6,0.5,0.2,0.1))
+for(i in var3){
+  boxplot(datos[[i]], main=i, horizontal=TRUE, col = coul)
+}
+for(i in var3){
+  hist(datos[[i]], main=i, xlab=i, col = "darkslategray3")
+}
+```
+
+Del gráfico anterior podemos concluir que hubo mayoría hombres y de personas blancas que participaron en el estudio, los participantes en su gran parte dedico aproximadamente 10 años a su educación y la edad de la población tenía 20 hasta un poco más de 100 años y que aproximadamente $\frac{1}{3}$ de las personas fallecieron y que además la mayoría de estas murieron en el hospital.
+
+Por otra parte, en cuanto a lo que concierne a costos, una gran mayoría de pacientes pago menos de 100.000 dólares al igual que en términos de microcostos y relación costo-relación, debido a este valor podría ser dado por procedimientos ambulatorios o periodos cortos en el hospital, por otro lado, los atípicos que sobrepasan los 500.000 dólares podrían deberse a tratamientos médicos de largo plazo o condiciones especiales de cada individuo.
+
+Algunos cambios en estas variables que se podrian realizar son:
+
+-   Variable (race) podria agruparse para usar las categorias ("white, black and other") añadiendole a other los pacientes "asian" y "hispanic".
+
+-   Variable (income) podria agrupar "\$25-\$50k y \>\$50k" dejando asi 3 categorias.
+
+-   Variables (charges)(totcst)(totmcst) podrían convertirse en dícotomicas.
+
+### Examenes
+
+Estos exámenes fueron realizados en el tercer día del estudio propuesto. Entre las que se encuentran la presión arterial media (*meanbp*), recuento de glóbulos blancos(*wblc*), frecuencia cardiaca (*hrt*) y respiratoria (*resp*), temperatura(*temp*), niveles de albúmina (*alb*), bilirrubina (*bili*) y creatina (*crea*); concentración de sodio sérico (*sod*), pH en sangre (*ph*), niveles de glucosa (*glucose*) y nitrógeno uerico (*bun*) y producción de orina (*urine*). Además del PAFI (*pafi*), indicador clínico de hipoxemia.
+
+```{r}
+variables <- c("meanbp","hrt","resp","temp","pafi")
+var2 <- c("wblc","alb")
+var21 <- c("bili","crea")
+var <-c("sod","ph","glucose","bun","urine")
+par(mfrow=c(2, 3), mai=c(0.6,0.5,0.2,0.1)) 
+for (variable in variables) {
+  hist(datos[[variable]], main=variable, xlab=variable, col = "darkslategray3")
+}
+
+par(mfrow=c(2,2), mai=c(0.6,0.5,0.2,0.1))
+for(i in var2){
+  boxplot(datos[[i]], main=i, horizontal=TRUE, col = coul)
+}
+for(i in var2){
+  hist(datos[[i]], main=i, xlab=i, col = "darkslategray3")
+}
+
+par(mfrow=c(2,2), mai=c(0.6,0.5,0.2,0.1))
+for(i in var21){
+  boxplot(datos[[i]], main=i, horizontal=TRUE, col =coul)
+}
+for(i in var21){
+  hist(datos[[i]], main=i, xlab=i, col = "darkslategray3")
+}
+
+par(mfrow=c(2, 3), mai=c(0.6,0.5,0.2,0.1))  
+for (variable in var) {
+  hist(datos[[variable]], main=variable, xlab=variable, col = "darkslategray3")
+}
+```
+
+Considerando los valores habituales de ciertos niveles, tales como la creatinina o la bilirrubina, existen diversos valores atípicos que podrían afectar a los pacientes hasta tener desenlaces graves. A pesar de que la mayoría de estos valores se encuentran en niveles normales, resulta fundamental prestar atención a los atípicos de estos examenes.
+
+Al ser información con datos cuantitativos la cual es fácilmente relacionable con otras variables, inicialmente no se desea eliminar ninguna de estas, pero es posible que (wblc) y (alb) reciban uso de algunos métodos (filtrar datos completos, imputar datos) para maximizar su rendimiento, de ser inútil el esfuerzo para comprobar su uso es altamente probable que no se empleen para este estudio.
+
+### Enfermedad
+
+Esta sección tiene seis variables relacionadas con enfermedades y condiciones de salud que poseían los participantes durante el estudio.
+
+-   Diabetes como comorbilidad (*diabetes*)
+-   Demencia como comorbilidad (*dementia*)
+-   Cáncer (*ca*)
+-   Orden de No Reanimación (*dnr*): Esta variable tiene los siguientes factores: *dnr after sadm* es decir, orden de no reanimación después del inicio de la admisión, *dnr before sadm* orden de no reanimación antes del inicio de la admisión y *no dnr* no hay orden de no reanimación.
+-   Categoría de enfermedad (*dzclass*): Aquí se agrupan en tipos de enfermedades.
+    -   ARF/MOSF
+    -   COPD/CHF/Cirrhosis
+    -   Cancer
+    -   Coma
+-   Comorbilidades en simultáneo que presenta el paciente (*num.co*).
+
+```{r}
+var_enf <- c("diabetes", "dementia","ca","dnr","dzclass","num.co")
+par(las=3,mfrow=c(2,3), mai=c(0.6,0.5,0.2,0.1))
+for (i in var_enf) {
+  conteo <- table(datos[[i]])
+  text(x = barplot(conteo, col = coul, main = i), y = conteo, labels = conteo, pos = 3, cex = 0.8, col = "blue")
+}
+```
+
+De los gráficos tenemos que la mayoría de personas no tienen cáncer; por otro lado, la mayoría de personas tienen tres o menos comorbilidades, y la demencia y diabetes no son una comorbilidad muy común entre los pacientes estudiados, al igual que tener una orden de no reanimación.
+
+Revisando las variables (ca) y (num.co) podrían recibir un cambio en la categorización para mejorar su uso en este estudio.
+
+-   En (ca) se podría agrupar "yes" y "metastasic" para hacer un análisis más fácilmente interpretable.
+
+-   En (num.co) es una alternativa convertir en 3+ o 4+ la cantidad de comorbilidades para proveer conclusiones de si influye altamente en la mortalidad de los pacientes.
+
+### Seguimiento de casos
+
+En esta agrupación se encuentral las variables referentes al estudio de seguimiento de los pacientes con 15 variabbles.
+
+-   Índice de Actividades de la Vida Diaria (AVD) del paciente, llenado por el paciente (*adlp*).
+-   Índice de actividades de la vida diaria (AVD) del paciente, completado por un sustituto (*adls*).
+-   Nivel de discapacidad del paciente (*sfdm2*): Cabe aclarar que esta variable se indica como correlacionada con las dos anteriores mencionadas.
+    -   \<2 mo. follow-up: Seguimiento menor a dos meses desde el inicio del estudio.
+    -   adl\>=4 (\>=5 if sur): Si el nivel de capacidad funcional en las actividades de la vida diaria es igual o mayor a 4 (o igual o mayor a 5 si se trata de un sustituto)
+    -   Coma or Intub: Presencia de coma o intubación en el paciente
+    -   no(M2 and SIP pres): No hay presencia de enfermedad en el segundo mes y que no hay impacto en el Perfil de Enfermedad (SIP).
+    -   SIP\>=30: Impacto significativo en el Perfil de Enfermedad (SIP) con un valor igual o superior a 30.
+-   Puntuación SUPPORT de fisiología predicha por un modelo (*sps*)
+-   Puntaje APACHE III (*aps*) que evalúa la función fisiológica del paciente donde se excluyen los pacientes que están en coma, con alteración de los niveles de nitrógeno ureico en sangre y la producción de orina.
+-   Estimación de supervivencia a 2 meses en el día 3 predicha por un modelo de pronostico realizado en el dataset SUPPORT (*surv2m*).
+-   Estimación de supervivencia a 6 meses en el día 3 predicha por un modelo de pronostico realizado en el dataset SUPPORT (*surv6m*).
+-   Datos de las actividades de la vida diaria estimados por medio del sustituto (*adlsc*)
+-   Días desde el ingreso al estudio hasta el alta (*slos*)
+-   Coma Score basado en la escala de Glasgow, predicha por un modelo (*scoma*).
+-   Día de estancia en el hospital en el que el paciente ingresó al estudio (*h.day*).
+-   Estimación de supervivencia de 2 meses del médico para el paciente.(*prg2m*)
+-   Estimación de supervivencia de 6 meses del médico para el paciente. (*prg6m*)
+-   Día de la orden de no reanimación (\<0 si es antes del estudio) (*dnrday*)
+-   Dias de seguimiento (*d.time*).
+
+```{r}
+var_est1 <-c("adlp","adls","scoma")
+var_est2 <- c("sps","aps","surv2m","surv6m","adlsc")
+var_est3 <- c("prg2m","prg6m","d.time")
+var_est4 <- c("slos","hday","dnrday")
+
+par(mfrow=c(3,3), mai=c(0.6,0.5,0.2,0.1)) 
+for (i in var_est2) {
+  hist(datos[[i]], main=i, xlab=i, col = "darkslategray3")
+}
+for (i in var_est3) {
+  hist(datos[[i]], main=i, xlab=i, col = "darkslategray3")
+}
+
+par(mfrow=c(2,3), mai=c(0.6,0.5,0.2,0.1))
+for(i in var_est4){
+  boxplot(datos[[i]], main=i, horizontal=TRUE, col = coul)
+}
+for(i in var_est4){
+  hist(datos[[i]], main=i, xlab=i, col = "darkslategray3")
+}
+
+par(las=3, mfrow=c(1,3), mai=c(0.6,0.5,0.2,0.1))
+for (i in var_est1) {
+  conteo <- table(datos[[i]])
+  text(x = barplot(conteo, col = coul, main = i), y = conteo, labels = conteo, pos = 3, cex = 0.8, col = "blue")
+}
+
+ggplot(datos) +
+  geom_bar(aes(y = sfdm2), fill = "darkslategray3", alpha = 0.6) +
+  coord_flip()
+```
+
+De los días de seguimiento tenemos tiempos heterogéneos entre los participantes, mientras que no hay tantas órdenes de no reanimación antes del estudio.
+
+Por otra parte, verificando las variables se pueden realizar nuevas categorizaciones en (adlp) y (adls) que son valores sobre actividades físicas, pero no se esperan grandes cambios.
+
+(slos),(hday) y (dnrday) son días que nos otorgan datos, así que para el análisis agruparlos no es buena idea a priori, pero es posible que después de hacer la metodología del curso de Estadística Descriptiva Multivariada se obtengan herramientas para ver si se cambian o no.
+
+(adlsc) son datos de las actividades de la vida diaria estimados por medio del sustituto y al ver la gráfica se podría emplear una categoría para 4+ aunque se debe verificar con (adlp) y (adls) para dejar las tres variables con los mismos intervalos de interpretación.
+
+## Análisis Bivariado
+
+#### Cuantitativa - Cuantitativa
+
+Nos planteamos la posibilidad de realizar el uso de variables continuas de la estimación de supervivivencia de los medicos (prg2m, prg6m) frente a la predicha por los modelos del estudio (surv2m, surv6m).
+
+Para manejar estos datos fue necesario filtrar por variables y luego usar las ubservaciones que no tuvieran datos faltantes por medio del paquede de ¨*sqldf*. Inicialmente estas variables se presentaban como aquellas que podrían arrojar resultados que influyeran en los objetivos planteados, sin embargo despues de reaizar un análisis de varianza y correlación se presentaron los siguientes resultados.
+
+```{r}
+b <- sqldf("select   surv2m, surv6m, prg2m, prg6m
+       from     datos
+       where    surv2m is not null and surv6m is not null and prg2m is not null
+           and prg6m is not null")
+
+kable(cor(b[,c(1,2)], b[,c(3,4)]), digits = 2)
+kable(var(b[,1:4]), digits = 2)
+plotpairs(b[,1:4])
+```
+
+Observando la tabla, estas variables poseen muy poca variabilidad y poca correlación entre ellas, siend esto resultados que no eran los esperados frente a la magnitud de la importancia sobre los datos que poseen.
+
+Además se planteo una relación entre los gastos medicos y los días que permanecion en el hospital hasta que fue dado de alta. A su vez, debido a los valores faltantes se escogieron aquellos individuos que poseian ambos valores completos.
+
+```{r}
+c <- sqldf("select   charges, slos
+       from     datos
+       where    charges is not null ")
+
+kable(cor(c), digits = 2)
+```
+
+Donde hay una correlación levemente alta entre ambas variables.
+
+#### Cualitativa - Cuantitativa
+
+Por otro lado el tipo de enfermedad frente a los examenes aplicados nos pueden dar alguna información de la salud de los pacientes durante los estudios.
+
+```{r, warning=FALSE}
+grafico_variable1 <- ggplot(datos, aes(y = meanbp, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable2 <- ggplot(datos, aes(y = wblc, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable3 <- ggplot(datos, aes(y = hrt, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable4 <- ggplot(datos, aes(y = resp, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable5 <- ggplot(datos, aes(y = temp, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable6 <- ggplot(datos, aes(y = pafi, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+graficos <- list(grafico_variable1, grafico_variable2, grafico_variable3,
+                 grafico_variable4, grafico_variable5, grafico_variable6)
+do.call(grid.arrange, c(graficos, ncol = 2))
+
+grafico_variable7 <- ggplot(datos, aes(y = alb, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable8 <- ggplot(datos, aes(y = bili, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable9 <- ggplot(datos, aes(y = crea, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable10 <- ggplot(datos, aes(y = sod, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable11 <- ggplot(datos, aes(y = ph, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable12 <- ggplot(datos, aes(y = glucose, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable13 <- ggplot(datos, aes(y = bun, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+grafico_variable14 <- ggplot(datos, aes(y = urine, x = dzclass)) +
+  geom_boxplot(fill = "slateblue", alpha = 0.2) +
+  coord_flip()
+
+graficos1 <- list(grafico_variable7, grafico_variable8, grafico_variable9,
+                 grafico_variable10, grafico_variable11, grafico_variable12)
+do.call(grid.arrange, c(graficos1, ncol = 2))
+
+graficos2 <- list(grafico_variable13, grafico_variable14)
+do.call(grid.arrange, c(graficos2, ncol = 2))
+```
+
+En general, se observa una gran cantidad de datos atipicos en diferentes examenes, puesto que es un estudio de pacientes enfermos entonces los resultados no estaran guiados por la media de una persona normal. Se espera que una de las posibles relaciones entre pacientes muertos y examenes medicos, sea debido a los altos valores en los registros dados.
+
+#### Cualitativa - Cualitativa
+
+Además de eso tenemos unas posibles relaciones categoricas a tener en cuenta, en este caso los pacientes muertos frente al tipo de enfermedad que poseen y con reapecto a su orden de no reanimación.
+
+```{r, warning=FALSE}
+n <- nrow(datos)
+# cualitativa cualitativa: muerte con cancer, muerte con comorbilidades
+tc <- table(datos$death, datos$ca)
+tabtc <- cbind(tc, totF = rowSums(tc))
+tabtc <- rbind(tabtc, totC=colSums(tabtc))
+kable(cbind(tabtc, rep(" ", 5), round(tabtc/n*100, 1)), 
+      digits = 1)
+```
+
+Se encontró un porcentaje elevado de fallecidos entre aquellos que no presentaron cancer como diagnostico.
+
+```{r, warning=FALSE}
+tc <- table(datos$death, datos$num.co)
+tabtc <- cbind(tc, totF = rowSums(tc))
+tabtc <- rbind(tabtc, totC=colSums(tabtc))
+kable(cbind(tabtc, rep(" ", 5), round(tabtc/n*100, 1)), 
+      digits = 1)
+
+```
+
+Podemos observar que hubo un mayor porcentaje de pacientes fallecidos entre aquellos que presentaban tres o menos comorbilidades frente aquellos que presentaban más de cuatro. Además podemos notar que existe una mayor proporción entre pacierntes vivos con siete comorbiblidades respecto a los fallecidos.
+
+```{r}
+mycolors <- colors()[c(68,72,92,60)]
+par(mfrow = c(2,2), mai = c(0.3,1,0.5,0.1), las = 1, cex = 0.5)
+vari <- c("sex","death","dnr","income")
+
+for(i in vari){
+  tc <- unclass(table(datos$dzclass, datos[[i]]))
+  plotct(tc, "row", col=mycolors)
+  title(main = i)
+}
+```
+
+Revisando las graficas, hay más personas vivas que tienes cancer en comparación con las otras enfermedades registradas, además que aquellas personas en coma tienen más ordenes de no reanimación despues de ser admitidos en el estudio
+
+#### Datos faltantes
+
+De entre las variables continuas presentadas, hay tres exámenes que presentan entre sus observaciones casi la mitad de datos faltantes, siendo estos los niveles de glucosa, niveles de nitrógeno ureico en sangre y producción de orina. Por lo anterior se realiza una caracterización de estas variables respecto a las variables de diabetes, demencia, cáncer (ca), categoría de la enfermedad (dzclass), género y raza.
+
+```{r}
+datos$gluc_inf <- as.factor(ifelse(!is.na(datos$glucose)==FALSE,"Falta","No falta"))
+enf <- c("diabetes","dementia","ca","dzclass","sex","race")
+a <- data.frame(datos$gluc_inf)
+b <- data.frame(datos[,enf])
+
+cluster.carac(b, a, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE)
+```
+
+Esto quiere decir que aquellos pacientes con valores no faltantes en el examen de glucosa se caracterizan por tener un tipo de enfermedad ARF/MOSF, diabetes y demencia; sin embargo, la variable de cáncer puede ser confusa, ya que "ca" indica que tener cáncer puede caracterizar nuestra variable mientras "dzclass" indica lo contrario.
+
+```{r}
+datos$urine_inf <- as.factor(ifelse(!is.na(datos$urine)==FALSE,"Falta","No falta"))
+c <- data.frame(datos$urine_inf)
+cluster.carac(b, c, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE)
+```
+
+En cuanto a los exámenes de orina, los pacientes con datos no faltantes se caracterizan por ser hispanos y por tener un tipo de enfermedad ARF/MOSF junto con diabetes y una coma. A su vez, "dzclass" y "ca" parecen ser contradictorias en este caso.
+
+```{r}
+datos$bun_inf <- as.factor(ifelse(!is.na(datos$bun)==FALSE,"Falta","No falta"))
+d <- data.frame(datos$bun_inf)
+cluster.carac(b, d, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE)
+```
+
+Para el examen de niveles de nitrógeno ureico en la sangre, los pacientes que carecen de datos adicionales se encuentran caracterizados por ser originarios de la comunidad hispana o de otra raza, y por tener un tipo de patología ARF/MOSF, diabetes, demencia o coma. Aquellas variables que involucran el cáncer vuelven a ser contradictorias en cuanto a su caracterización o no debido al examen realizado.
+
+Será importante ver si la confusión entre *dzclass.Cancer* y *ca.yes* permanece durante el presente proyecto, además de que en el caso de Índice de Actividades de la Vida Diaria (AVD) del paciente llenado por el paciente (*adlp*) con 5641 datos faltantes puede ser tratado de alguna manera debido a su relación con el nivel de discapacidad del paciente (*sfdm2*).
+
+## Objetivo General
+
+-   Proporcionar un análisis descriptivo y/o exploratorio con metodologías del curso de Estadística Descriptiva Multivariada a la base de datos SUPPORT2 para examinar la relación entre la(s) variable(s) independiente(s) y la variable dependiente escogida.
+
+### Objetivos Específicos:
+
+-   Explorar patrones y tendencias en la mortalidad de pacientes hospitalizados en estado crítico a lo largo del tiempo en los diferentes centros médicos.
+
+-   Clasificar a los pacientes hospitalizados en grupos o categorías en función de su riesgo de mortalidad, utilizando las variables socio-demográficas, de estado de salud y de enfermedades.
+
+-   Clasificar a los pacientes en grupos de riesgo bajo, moderado y alto en función de los resultados a lo largo del estudio.
+
+-   Comparar las características socio-demográficas y aquellas en seguimiento de casos de pacientes hospitalizados entre diferentes tipos de enfermedades, centros médicos o grupos de edad.
+
+-   Investigar la relación entre la edad, el género y la presencia de comorbilidades con la mortalidad en pacientes hospitalizados en estado crítico.
+
+-   Evaluar los resultados de los exámenes realizados a los pacientes para buscar relaciones y patrones que justifiquen su estadía en el hospital, controlando otros posibles factores de confusión.
+
+Estos objetivos proporcionan una estructura para explorar diferentes aspectos de la mortalidad en pacientes hospitalizados en estado crítico utilizando estadística descriptiva multivariada, desde la descripción de datos hasta la identificación de relaciones y efectos entre variables clave.
+
+## Justificación
+
+Investigaciones sobre los factores asociados con pacientes hospitalizados críticamente puede mejorar la calidad de la atención médica al facilitar el desarrollo de intervenciones y estrategias dirigidas a reducir las tasas de mortalidad y mejorar los resultados de salud.
+
+Además, este tipo de estudios puede tener un impacto significativo en la salud pública al proporcionar información esencial para la planificación y el desarrollo de políticas de salud igualitarias y eficientes para reducir la carga en enfermeros y así en los pacientes igualmente.
+
+El estudio ofrece información esencial para instituciones médicas y hospitales, permitiendo mejoras en los protocolos de tratamiento para pacientes. Al comprender los factores que afectan la mortalidad, las instituciones pueden asignar recursos de manera más eficiente, optimizando sus recursos. Esto contribuye al cumplimiento de los objetivos institucionales de brindar servicio de calidad.
+
+La investigación propuesta aportará al conocimiento médico al identificar nuevos factores o confirmar la importancia de los existentes en la mortalidad de los pacientes, optimizando la distribución de recursos y esfuerzos. Además, permitirá validar hallazgos previos y teorías relacionadas con los determinantes de la mortalidad en enfermos, respaldando estas asociaciones con evidencia científica adicional. Los resultados se integrarán al cuerpo de literatura científica existente sobre medicina crítica y cuidados intensivos, enriqueciendo el conocimiento para futuras investigaciones y revisiones sistemáticas.
+
+El proyecto representa una oportunidad para investigadores y profesionales de sumergirse en un área específica de interés profesional, desarrollar habilidades de investigación y contribuir al avance de su campo. Para médicos y profesionales de la salud, puede significar una mejora en la calidad de la atención a los pacientes al aplicar hallazgos de investigación en la práctica clínica. Desde la perspectiva de los estadísticos, contribuir al conocimiento científico y mejorar los resultados de salud puede generar satisfacción personal y profesional, además de abrir nuevas oportunidades laborales y sociales.
+
+Estas justificaciones proporcionan una amplia gama de razones por las cuales este proyecto es socialmente relevante, institucionalmente importante, científicamente valioso y personalmente gratificante para los investigadores y profesionales de la salud involucrados.
+
+## Metodologia
+
+Se trabajará con el ACP, ACS U ACM
+
+```{r}
+nubes <- sqldf("select   surv2m, surv6m, meanbp, wblc, hrt, resp, temp, pafi, alb, bili,
+       crea, sod, ph, glucose, bun, urine, age
+       from     datos
+       where    surv2m is not null and surv6m is not null and meanbp is not null and
+       wblc is not null and hrt is not null and resp is not null and temp is not null and
+       pafi is not null and alb is not null and bili is not null and
+       crea is not null and sod is not null and ph is not null and glucose is not null and 
+           bun is not null and urine is not null and age is not null")
+
+# selección de nube
+Y <- nubes[,3:17]
+
+#centro de Y
+X <- dudi.pca(Y, scannf = FALSE, nf = 3)
+valp <- t(inertia(X)$tot.inertia) # valores propios
+kable(valp, digits = 3)
+
+barplot(X$eig, horiz = TRUE) # histograma de valores propios
+abline(v = 1, lty = 3)
+
+#COOERDENADAS
+kable(X$co, digits = 3)
+```
+
+# Análisis de Componentes Principales (ACP)
+
+## Datos Faltantes
+
+```{r, include=FALSE}
+library(readr)
+library(plotly)
+library(ggplot2)
+library(FactoClass)
+library(dplyr)
+library(sqldf)
+library(knitr)
+library(gridExtra)
+library(RColorBrewer)
+library(sqldf)
+library(factoextra)
+library(FactoMineR)
+library(Factoshiny)
+```
+
+```{r, output=FALSE}
+datos <- read_csv("datos.csv")
+
+categoricas <- c("death","sex","hospdead","dzgroup","dzclass","income","race","ca","dnr","sfdm2","diabetes","dementia","num.co",
+                 "scoma")
+
+names(datos)[names(datos) == "d.time"] <- "dtime"
+
+datos[, categoricas] <- lapply(datos[, categoricas], factor)
+coul <- brewer.pal(11, "Set3")
+```
+
+De manera inicial, se va a realizar el ajuste de los datos faltantes. Además, las variables cuantitativas seleccionadas para realizar el análisis de componentes principales a usar son aquellas que pertenecen al grupo de exámenes presentados, junto con las variables de edad, de estimación de supervivencia del médico y las proporcionadas por el modelo. Adicionalmente, se empleará el uso de la puntuación promedio de TISS y de fisiología, añadiendo como factor final los costos hospitalarios.
+
+Se realiza una caracterización del conjunto de datos con las variables cuantitativas con el fin de identificar el estado de los datos faltantes respecto a las variables de diabetes, demencia, cáncer (ca), categoría de las enfermedades (dzclass), género, raza y muerte.
+
+```{r}
+variables <- c("meanbp", "wblc", "hrt", "resp", "temp", "pafi",
+               "alb", "bili","prg2m","prg6m","charges", "avtisst", "sps", "aps", 
+               "crea", "sod", "ph", "glucose", "bun", "urine") 
+
+enf <- c("diabetes","dementia","ca","dzclass","sex","race","death")
+
+datos2 <- datos
+for (i in variables){
+  datos2[[i]]<- as.factor(ifelse(!is.na(datos[[i]])==FALSE,"Falta","No falta"))
+}  
+
+b <- data.frame(datos2[,enf])
+a1 <- data.frame(datos2$glucose)
+a2 <- data.frame(datos2$meanbp)
+a3 <- data.frame(datos2$wblc)
+a4 <- data.frame(datos2$hrt)
+a5 <- data.frame(datos2$resp)
+a6 <- data.frame(datos2$temp)
+a7 <- data.frame(datos2$pafi)
+a8 <- data.frame(datos2$alb)
+a9 <- data.frame(datos2$bili)
+a10 <- data.frame(datos2$prg2m)
+a11 <- data.frame(datos2$prg6m)
+a12 <- data.frame(datos2$charges)
+a13 <- data.frame(datos2$avtisst)
+a14 <- data.frame(datos2$sps)
+a15 <- data.frame(datos2$aps)
+a16 <- data.frame(datos2$crea)
+a17 <- data.frame(datos2$sod)
+a18 <- data.frame(datos2$ph)
+a19 <- data.frame(datos2$bun)
+a20 <- data.frame(datos2$urine)
+```
+
+<div>
+
+<button onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === &#39;none&#39; ? &#39;block&#39; : &#39;none&#39;;">
+
+Mostrar/Ocultar Salida Output
+
+</button>
+
+::: {style="display:none;"}
+```{r}
+# Salida de los cálculos
+print(cluster.carac(b, a1, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a3, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a7, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a10, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a11, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a13, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a18, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a19, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+
+print(cluster.carac(b, a20, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE))
+```
+:::
+
+</div>
+
+Los resultados obtenidos de las caracterizaciones previas, que incluyen exámenes de glucosa, conteo de glóbulos blancos, pH en sangre, orina y niveles de nitrógeno ureico en la sangre, junto con las estimaciones de supervivencia proporcionadas por el médico a los 2 y 6 meses, indican la presencia de información faltante.
+
+Esta ausencia de datos podría deberse a que el diagnóstico de COPD (Enfermedad Pulmonar Obstructiva Crónica), CHF (Insuficiencia Cardíaca Congestiva) y Cirrosis no depende exclusivamente de estos exámenes mencionados anteriormente. En su lugar, se tienen en cuenta otros exámenes y procedimientos médicos administrados al paciente externamente a este estudio. En el caso de la presión parcial de oxígeno arterial, debido a que 'dzclass' en su nivel COPD/CHF/Cirrosis incluye esta última enfermedad, parte de sus valores faltantes se pueden explicar por el hecho de que para diagnosticar Cirrosis no es obligatorio este examen. Por lo tanto, la categoría se verá afectada.
+
+<div>
+
+<button onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === &#39;none&#39; ? &#39;block&#39; : &#39;none&#39;;">
+
+Mostrar/Ocultar Salida Output
+
+</button>
+
+::: {style="display:none;"}
+```{r}
+cluster.carac(b, a16, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE)
+```
+:::
+
+</div>
+
+En relación con el examen de creatinina para las personas diagnosticadas con cáncer, aunque no es un examen esencial para su diagnóstico, dependiendo del tipo de cáncer, puede servir como indicador de alguna disfunción en el sistema renal. Esto también es aplicable a pacientes con cáncer en estado metastásico.
+
+Además, aquellas personas que se encuentran en las categorías de 'Cáncer', 'Coma' y 'COPD/CHF/Cirrosis' carecen de un índice de supervivencia proporcionado por un médico. Se puede suponer que no es posible tener este indicador o que carece de sentido presentarlo en un corto periodo de tiempo, ya que hay enfermedades que requieren un largo periodo de seguimiento.
+
+En cuanto a las personas que no fueron diagnosticadas con diabetes, se puede observar que los exámenes que se caracterizan por datos faltantes son glucosa, índice de hipoxemia (mide la relación entre la presión parcial de oxígeno arterial y la fracción de oxígeno inspirado), pH en sangre, orina y niveles de nitrógeno ureico. Se podría pensar que el paciente ya tenía la información de antemano y, por lo tanto no se realizó un nuevo examen correspondiente.
+
+Para los pacientes sin diagnóstico de demencia, se presenta falta de datos en los exámenes anteriores junto con las estimaciones de supervivencia del médico. Estos últimos pudieron omitirse debido a que el médico a cargo no lo consideró conveniente o por un error del investigador.
+
+<div>
+
+<button onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === &#39;none&#39; ? &#39;block&#39; : &#39;none&#39;;">
+
+Mostrar/Ocultar Salida Output
+
+</button>
+
+::: {style="display:none;"}
+```{r}
+cluster.carac(b, a8, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE) 
+
+cluster.carac(b, a9, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE) 
+
+cluster.carac(b, a12, tipo.v = "ca", 
+              v.lim = 2, dn = 2, dm = 2, neg = TRUE) 
+```
+:::
+
+</div>
+
+Dentro del contexto sociodemográfico, la raza blanca presenta datos faltantes en el examen de glóbulos blancos y creatinina, lo cual, términos de informacion ausente son inferiores al 2% de los datos registrados. En el examen de bilirrubina, la falta de datos podría deberse a factores relacionados con las enfermedades que tenga el paciente o referentes a la genética. En lo que respecta a los asiáticos u otras razas, se presentan datos faltantes en el índice de hipoxemia e índice de albúmina, cuyos valores podrían estar asociados a categorías que no se han especificado en las variables de este estudio.
+
+Referente al sexo biológico, las mujeres poseen datos faltantes en el examen de bilirrubina, lo cual puede deberse a errores en la toma de los datos.
+
+Las estimaciones de supervivencia del médico no contiene información completa, y una posible explicación es que el médico a cargo no lo consideró conveniente de realizar en esas circunstancias o simplemente fue un error del investigador.
+
+En resumen, las variables de índice de hipoxemia, glucosa, pH en sangre, orina y niveles de nitrógeno ureico en sangre constituyen la mayoría de los datos faltantes en este estudio. Considerando las variables cualitativas utilizadas para dichos exámenes y teniendo en cuenta que son relevantes para diagnosticar pacientes bajo ciertos criterios, la falta de estos puede ser atribuida a la omisión o error del investigador.
+
+## Correlaciones
+
+Considerando lo anteriormente mencionado, se procedió a seleccionar las filas con los datos completos, con el fin de comprender la población en cuestión con la que se está trabajando y la relevancia de estos datos para realizar un análisis adecuado.
+
+```{r}
+nubes <- sqldf("select  surv2m, surv6m, meanbp, wblc, hrt, resp, temp, pafi,
+       alb, bili,prg2m,prg6m,charges, avtisst, sps, aps, dtime, hday,
+       crea, sod, ph, glucose, bun, urine, diabetes,dementia,ca,dzclass,sex,race,death
+       from     datos
+       where    surv2m is not null  and surv6m is not null and 
+                meanbp is not null  and wblc is not null and 
+                hrt is not null     and resp is not null and 
+                temp is not null    and pafi is not null and 
+                alb is not null     and bili is not null and 
+                prg2m is not null   and prg6m is not null and
+                charges is not null and dtime is not null and
+                avtisst is not null and sps is not null and
+                aps is not null     and  
+                crea is not null    and sod is not null and 
+                ph is not null      and glucose is not null and 
+                bun is not null     and urine is not null and 
+                hday is not null    and race is not null")
+
+Y1 <- nubes[,c(1:13,15,16,19:24)]
+```
+
+Dado el filtro para trabajar con datos completos, contiene lo siguiente:
+
+<div>
+
+<button onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === &#39;none&#39; ? &#39;block&#39; : &#39;none&#39;;">
+
+Mostrar/Ocultar Salida Output
+
+</button>
+
+::: {style="display:none;"}
+```{r}
+summary(nubes)
+```
+:::
+
+</div>
+
+En consecuencia, se disponen 22 variables cuantitativas con el fin de llevar a cabo el análisis de componentes principales y 10 cualitativas con el propósito de cumplir los objetivos propuestos, los cuales son: Explorar patrones y tendencias en la mortalidad de pacientes hospitalizados en estado crítico a lo largo del tiempo en los diferentes centros médicos (1). Evaluar los resultados de los exámenes realizados a los pacientes para buscar relaciones y patrones que justifiquen su estadía en el hospital, controlando otros posibles factores de confusión (6).
+
+Para esto se emplearán las variables de puntuación promedio de TISS (*Avtisst*) y los días de estancia del paciente en el hospital (*hday*).
+
+En este conjunto de datos presentado *hday* está definido entre 1 y 137 días, mientras que los datos iniciales estaban entre 1 y 148 días. Por otra parte, *avtisst* inicialmente tenían valores entre 1 y 83 de puntuación de intervenciones terapéuticas, mientras que en la base de datos para el análisis de componentes varía entre 2 y 70 de puntuación.
+
+```{r}
+kable(cor(Y1), digits = 3)
+```
+
+De lo anterior se puede notar que las variables de creatinina (*crea*) y nitrogeno ureico en la sangre (*bun*) tienen una de las más altas correlaciones con 0.698.
+
+Además, observando las correlaciones de las estimaciones de supervivencia de 2 y 6 meses dadas por el modelo SUPPORT (*surv2m, surv6m*) junto con las estimaciones de supervivencia de 2 y 6 meses dadas por el médico (*prg2m, prg6m*) confirman lo dicho en el diagnóstico y, en consecuencia, son algunas de las más altas en este estudio.
+
+En cuanto a las variables de puntuación de fisiología de SUPPORT y de APACHE III(*aps, sps*), se encuentran correlacionadas debido a que miden aspectos similares en el estudio, por su parte las estimaciones de supervivencia de 2 y 6 meses son correlacionadas porque sus valores podrían no variar uno respecto del otro dado el estado del paciente en los 4 meses de diferencia entre la toma de las observaciones. De igual manera funciona para las estimaciones de supervivencia de 2 y 6 meses dadas por el médico.
+
+## ACP Normado
+
+Inicialmente, se plantea un ACP normado, ya que las unidades varían entre los diferentes exámenes tenidos en cuenta, además se tienen algunas variables de otros grupos definidos anteriormente con el fin de abordar los objetivos planteados.
+
+```{r}
+acp <- dudi.pca(Y1, scannf = FALSE, nf = 21)
+valp <- t(inertia(acp)$tot.inertia) # valores propios
+kable(valp, digits = 3)
+
+barplot(acp$eig, horiz = TRUE) # histograma de valores propios
+abline(v = 1, lty = 3)
+
+```
+
+Se decide usar un punto de corte para los valores alrededor de 1, lo que nos indica 7 posibles ejes a emplear en esta investigación. Con esta decisión se tiene que, en términos de inercia, acumula el 59.649$\%$ de información.
+
+```{r}
+acp <- dudi.pca(Y1, scannf = FALSE, nf = 7)
+kable(acp$co, digits = 3)
+```
+
+Dado el objetivo: "Evaluar los resultados de los exámenes realizados a los pacientes para buscar relaciones y patrones que justifiquen su estadía en el hospital, controlando otros posibles factores de confusión." Se utilizará como variable ilustrativa a la puntuación promedio de TISS (*Avtiss*) debido a su relación con las unidades de cuidados intensivos e intermedios, permitiendo así cumplir este propósito de investigación.
+
+```{r}
+Avts <- cor(nubes$avtisst, acp$li)
+rownames(Avts)<-"avtisst"
+kable(Avts, digits = 3)
+
+Hday <- cor(nubes$hday, acp$li)
+rownames(Hday)<-"hday"
+kable(Hday, digits = 3)
+```
+
+```{r}
+Y2 <- nubes[,c(1:14,15,16,18,19:24)]
+kable(cor(Y2), digits = 3)
+```
+
+```{r}
+s.corcircle(acp$co, cgrid = 0, full = FALSE, clab = 0.7)
+s.arrow(Avts, add.plot = TRUE, boxes = FALSE)
+s.arrow(Hday, add.plot = TRUE, boxes = FALSE)
+```
+
+Teniendo en cuenta el gráfico, la variable ilustrativa (*avtisst*) se ve mejor representada sobre el primer eje que frente a los otros 6, además de eso se puede ver una alta correlación con las variables de **Puntuaciones y Estimaciones.** Esto tiene sentido, pues esta variable mide la relación enfermero-paciente en las actividades diarias de este último, mientras que las variables ("aps" y "sps") son puntuaciones de fisiología dadas por modelos que obtienen sus valores de las actividades realizadas por los pacientes en cuidados intensivos.
+
+```{r}
+var <- get_pca_var(acp)
+fviz_contrib(acp, choice = "var", axes = 1)
+```
+
+Por otro lado, se identifica a las variables de estimación de supervivencia ("*surv2m", "surv6m", "prg2m", "prg6m"*) con una relación con *Avtisst*, esto podría significar que las personas en cuidados intensivos e intermedios tienen menores índices de supervivencia dados tanto por el médico como por el modelo usado.
+
+Como los días de estancia de los pacientes en el hospital son una variable de interés, se puede ver que la puntuación de TISS está relacionada con esta medida, al igual que se ve influenciada por el costo diario de la hospitalización del paciente.
+
+```{r}
+fviz_contrib(acp, choice = "var", axes = 2)
+```
+
+En el segundo eje, las variables mejor representadas sobre este son Orina, pH, niveles de nitrógeno ureico (*bun*) y creatinina (*crea*), por su parte podríamos nombrar este eje como **Perfil metabólico básico VS completo**, debido a que el perfil básico da una variedad de pruebas que evalúan aspectos fundamentales del funcionamiento metabólico y fisiológico del cuerpo mientras que el completo incluyen pruebas de la oxigenación arterial parcial, niveles de electrolitos como el sodio, evaluación de la función renal con creatinina y niveles de nitrógeno ureico, así como la bilirrubina que puede indicar la función hepática.
+
+```{r}
+s.corcircle(acp$co, cgrid = 0, full = FALSE, clab = 0.7, xax = 3, yax = 4)
+s.arrow(Avts, xax = 3, yax = 4, 
+        add.plot = TRUE, boxes = FALSE)
+s.arrow(Hday, xax = 3, yax = 4, 
+        add.plot = TRUE, boxes = FALSE)
+```
+
+```{r}
+fviz_contrib(acp, choice = "var", axes = 3)
+```
+
+El tercer eje, está mejor representado por las variables de temperatura y frecuencia cardiaca (*hrt*). Por una parte este eje engloba la medición de albúmina (un indicador de la función renal y nutricional), la relación entre la presión parcial de oxígeno arterial y el oxígeno respirado, (*pafi,* un indicador de la función pulmonar), tal así que podría ser denominado **Medidas Pulmonares y Metabólicas**, a su vez se incluye la frecuencia cardiaca (indicadores de la función cardiovascular), el conteo de glóbulos blancos (un indicador del sistema inmunológico), la temperatura (un indicador de la presencia de fiebre o infección), los niveles de sodio, los niveles de bilirrubina (un indicador de la función hepática) y los cargos médicos, englobados en **Parámetros Clínicos Generales**. Denominaremos el eje 3: "**Medidas Pulmonares y Metabólicas vs Parámetros Clínicos Generales**".
+
+Además, la frecuencia cardiaca y respiratoria junto con la temperatura muestran estar más relacionadas para el eje.
+
+```{r}
+fviz_contrib(acp, choice = "var", axes = 4)
+```
+
+Respecto al eje 4, la variable que mejor lo representa es cargos médicos. Este eje se ve influenciado en aspectos de cuidado médico y su estadía en el hospital. Denominamos este eje **Estancia Hospitalaria.**
+
+```{r}
+s.corcircle(acp$co, cgrid = 0, full = FALSE, clab = 0.7, xax = 5, yax = 6)
+s.arrow(Avts, xax = 5, yax = 6, 
+        add.plot = TRUE, boxes = FALSE)
+s.arrow(Hday, xax = 5, yax = 6, 
+        add.plot = TRUE, boxes = FALSE)
+```
+
+```{r}
+fviz_contrib(acp, choice = "var", axes = 5)
+```
+
+En el eje 5, lo mejor representado es la presión arterial media(*meanbp*), bajo el nombre de **Evaluaciones Clínicas y Bioquímicas Esenciales** donde se incluye, el examen de sodio (indicadores del equilibrio metabólico), el examen de presión arterial (un indicador de la salud cardiovascular), el examen de albúmina (un indicador de la función renal y nutricional), examen de niveles de nitrógeno en sangre y el examen de respiración (un indicador de la función pulmonar).
+
+```{r}
+fviz_contrib(acp, choice = "var", axes = 6)
+```
+
+En el eje 6, Glucosa es la variable mejor representada, donde **Exámenes de Laboratorio Clínico** con los exámenes de glucosa, conteo de glóbulos blancos, bilirrubina y sodio son pruebas de laboratorio que se realizan en muestras de sangre.
+
+```{r}
+s.corcircle(acp$co, cgrid = 0, full = FALSE, clab = 0.7, xax = 1, yax = 7)
+s.arrow(Avts, xax = 1, yax = 7, 
+        add.plot = TRUE, boxes = FALSE)
+s.arrow(Hday, xax = 1, yax = 7, 
+        add.plot = TRUE, boxes = FALSE)
+```
+
+Por último, el eje 7 es mejor representado por el examen de sodio en la sangre (*sod*) y por la frecuencia respiratoria (*resp*).
+
+Referente a las variables cualitativas dados los objetivos (1 y 3) tendremos en cuenta diabetes, demencia, cáncer, tipo de enfermedad y muerte.
+
+```{r}
+Ysupcat <- nubes[, c(25:31)]
+sup <- supqual(acp, Ysupcat)
+kable(cbind(wcat = sup$wcat, d2 = sup$dis2, sup$coor), 
+      digits = 3)
+```
+
+Para la enfermedad de diabetes, demencia y cáncer, en sus tres niveles, en el plano podemos observar que para aquellas personas que tiene cáncer en estado no metastásico, tiende a tener valores altos de la puntuación de TISS, lo que implica mayor apoyo de personal médico para realizar actividades diarias del paciente, si bien aquellas personas que tienen cáncer en estado metastásico parecen tener niveles altos de TISS se esperaba una mayor influencia en el resultado debido a la gravedad de la enfermedad; sin embargo, este nivel se encuentra mejor representado en los ejes 3 y 4. Por su parte, los puntajes de TISS en relación con la diabetes no parecen ser significativamente diferentes a la media, al igual que las personas que no tienen demencia ni cáncer.
+
+Para los pacientes con diagnóstico de demencia se observa mejor retratado en el eje 4, aun así se distingue del resto por niveles más altos de TISS, lo que tiene sentido, pues una persona con esta enfermedad requiere mayor atención médica.
+
+```{r}
+plot(acp, Tcol = FALSE, ucal = 100, cex.row = 0.2,
+     xlim = c(-1,1.5), ylim = c(-0.4,0.4))
+s.arrow(Avts, add.plot = TRUE, boxes = FALSE)
+s.arrow(Hday, add.plot = TRUE, boxes = FALSE)
+points(sup$coor[3:4,], col = 4, pch = 16)
+points(sup$coor[1:2,], col = 2, pch = 16)
+points(sup$coor[5:7,], col = 7, pch = 16)
+text(sup$coor[3:4,], labels = rownames(sup$coor[3:4,]),
+     col = 4, pos = 1, font = 3)
+text(sup$coor[1:2,], labels = rownames(sup$coor[1:2,]),
+     col = 2, pos = 1, font = 3)
+text(sup$coor[5:7,], labels = rownames(sup$coor[5:7,]),
+     col = 7, pos = 1, font = 3)
+legend("topright", legend = c("Diabetes", "Demencia", "Cancer"), 
+       col = c(2, 4, 7), pch = 16)
+```
+
+```{r}
+kable(rbind(rbind(sup$tv[3:4,1:2],sup$tv[1:2,1:2],sup$tv[5:7,1:2])))
+```
+
+Del gráfico anterior se puede evidenciar que para aquellos pacientes diagnosticados con cáncer tienden a poseer mayores valores de puntaje de TISS al igual que más días de estancia en el hospital, por otra parte, aquellos con cáncer en estado metastásico tienen menos días hospitalizados en comparación con aquellos sin esta enfermedad tan avanzada. Así mismo, aquellas personas a las que no se les detectó cáncer, pasan menos días en el hospital y sus puntuaciones de TISS son más bajas que el promedio.
+
+Por su parte, aquellas personas diagnosticadas con demencia disponen más días de estancia en el hospital, al igual que puntajes más altos de TISS, mayores a los de cáncer metastásico. En cambio, los individuos aunque tengan o no diabetes o que no padecen demencia, permiten evidenciar que sus puntajes de TISS y su estancia en el hospital no parecen distanciarse del promedio en el estudio.
+
+```{r}
+plot(acp, Tcol = FALSE, ucal = 100, cex.row = 0.2,
+     xlim = c(-1,1.5), ylim = c(-1.5,0.5))
+s.arrow(Avts, add.plot = TRUE, boxes = FALSE)
+s.arrow(Hday, add.plot = TRUE, boxes = FALSE)
+points(sup$coor[8:11,], col = 4, pch = 16)
+points(sup$coor[12:13,], col = 2, pch = 16)
+points(sup$coor[14:18,], col = 7, pch = 16)
+text(sup$coor[8:11,], labels = rownames(sup$coor[8:11,]),
+     col = 4, pos = 1, font = 3)
+text(sup$coor[12:13,], labels = rownames(sup$coor[12:13,]),
+     col = 2, pos = 1, font = 3)
+text(sup$coor[14:18,], labels = rownames(sup$coor[14:18,]),
+     col = 7, pos = 1, font = 3)
+legend("topright", legend = c( "Sexo","Enfermedad", "Raza"), 
+       col = c(2, 4, 7), pch = 16)
+```
+
+```{r}
+kable(rbind(rbind(sup$tv[8:11,1:2],sup$tv[12:13,1:2],sup$tv[14:18,1:2])))
+```
+
+En relación con el promedio de puntuación de TISS y de días en el hospital, el género no presenta una distinción, sucede de igual manera con las razas negras y blancas. Por su parte, las razas de "hispanos", "asiáticos" y "otras" parecen tener altas medias en las variables indicadas; esto puede ser debido a las pocas observaciones tenidas en cuenta, donde la media se ve influenciada por valores atípicos.
+
+Los pacientes en coma, pueden ser diferenciados de las otras enfermedades de esta categoría, pues tienen una alta puntuación de TISS y dada su condición tendrán más días de estancia en el hospital, en cuanto a quienes poseen ablación/falla sistemática múltiple en órganos se evidencia niveles no tan altos en comparación con pacientes en coma y esto puede ser debido a que son procedimientos quirúrgicos. En comparación la enfermedad pulmonar obstructiva crónica/insuficiencia Cardiaca Congestiva/cirrosis muestran valores menores al promedio para los objetivos tratados; una posible razón es debido al fallecimiento repentino de los pacientes de estudio.
+
+```{r}
+plot(acp, Tcol = FALSE, ucal = 100, cex.row = 0.2,
+     xlim = c(-1,1.5), ylim = c(-0.5,0.5))
+s.arrow(Avts, add.plot = TRUE, boxes = FALSE)
+s.arrow(Hday, add.plot = TRUE, boxes = FALSE)
+points(sup$coor[19:20,], col = 4, pch = 16)
+text(sup$coor[19:20,], labels = rownames(sup$coor[19:20,]),
+     col = 4, pos = 1, font = 3)
+legend("topright", legend = c("Muerte"), 
+       col = c(4, 4, 7), pch = 16)
+```
+
+```{r}
+kable(sup$tv[19:20,1:2])
+```
+
+Con respecto a la muerte de los individuos del estudio, se muestra una clara diferencia entre aquellos que fallecieron y los que no. Entre quienes sobrevivieron se evidencian valores menores para los puntos tratados, puesto que entre ellos existen personas sin enfermedades terminales o en inicios de estas lo cual influencia la media de este nivel, en contraparte aquellos que murieron contienen valores más altos debido a los intensos procedimientos médicos o la gravedad de la enfermedad que poseían.
+
+## Conclusiones ACP
+
+-   Dado el primer objetivo mencionado, se usó la variable de puntuación de TISS (*avtisst*) debido a su relación con las unidades de cuidados intensivos e intermedios, se puede identificar que entre mayor sea este puntaje podrían existir patrones como: Valores altos de puntuación de fisiología bajo modelos("*aps" y "sps"*) que implican pacientes que requieren mayor apoyo del personal médico, por ejemplo, pacientes en coma o ablación/falla sistemática múltiple en órganos. Altos niveles de este puntaje son un factor de riesgo para los individuos con cáncer en estado metastásico.
+
+-   Respecto al segundo objetivo a tratar, se usó la variable días de estancia en el hospital (*hday*). No se identificaron patrones claros respecto a los exámenes médicos, pero el exámen de bilirrubina explica el 1.1$\%$ del total de esta variable siendo el mas alto de estos, además se encontraron otros factores como los costos médicos que van relacionados con la cantidad de tiempo que permaneció en el establecimiento de investigación más el añadido de los exámenes, la cual explica el 26.1$\%$ respecto al total. Por otra parte, las puntuaciones dadas por modelos, por el médico o puntuaciones de médicina estándar están relacionadas con la salud general del paciente, mostrando una mayor relevancia en comparación con los exámenes médicos.
+
+-   La cantidad de días de una hospitalización está más ligada a las enfermedades y al desarrollo de estas, más que por los exámenes practicados. Es importante tener en cuenta que los exámenes solo se realizaron una vez durante todo el estudio y que su aporte total a la variable es mínimo.
+
+-   En general los exámenes médícos cumplen su propósito para el diagnóstico de enfermedades, pero para los objetivos de este trabajo no fueron significativos, por otra parte, la variable cargos médicos ("*charges"*) presentó información de mayor utilidad en escala continua puesto que se pensaba inicialmente convertirla a catégorica, además las herramientas del análisis de componentes principales permitió a este estudio identificar elementos de peso en este conjunto de datos empleado para darle solución a los objetivos propuestos.
+
+# Analisis de corespondencias Multiples (ACM)
+
+Para el análisis de correspondencias simples y múltiples, teniendo en cuenta los siguientes objetivos de la entrega Propuesta:
+
+\- Comparar las características socio-demográficas y aquellas en seguimiento de casos de pacientes hospitalizados entre diferentes tipos de enfermedades, centros médicos o grupos de edad (4).
+
+\- Investigar la relación entre la edad, el género y la presencia de comorbilidades con la mortalidad en pacientes hospitalizados en estado crítico (5).
+
+## Recodificación de Variables
+
+```{r, include=FALSE}
+library(readr)
+library(plotly)
+library(ggplot2)
+library(FactoClass)
+library(dplyr)
+library(sqldf)
+library(knitr)
+library(gridExtra)
+library(ade4)
+library(knitr)
+library(DT)
+library(RColorBrewer)
+library(sqldf)
+library(factoextra)
+library(FactoMineR)
+library(Factoshiny)
+library(patchwork)
+```
+
+Debido a que en algunas variables a tratar existen categorías con pocos datos, se realizará una recodificación para facilitar la interpretación en la resolución de los objetivos.
+
+-   Raza: Se agruparán las razas asiáticas, hispanas y otras, con el fin de quedar con 3 categorías: "blancos", "negros" y "otros".
+
+-   Salario: Se agruparán salarios entre \$25 mil y \$50 mil con la categoría más de 50 mil dólares, dejando 3 de estas para la variable: "menos de 11 mil dólares", "entre 11 mil 25 mil dólares" y "más de 25 mil dólares".
+
+-   Edad: Con cuatro categorías quedarían de la siguiente forma. "Menor a 50 años", "entre 50 y 60 años", "entre 60 y 70 años" y "más de 70 años".
+
+-   Educación: Tres categorías en las que están "Menor a 10 años de educación", "entre 10 y 13" y "más de 13 años".
+
+-   Número de comorbilidades: Se agrupan aquellas que tengan 3 o más comorbilidades.
+
+```{r}
+names(datos)[names(datos) == "num.co"] <- "numco"
+
+# recodificación de NA
+datos$race <- ifelse(datos$race %in% c("asian","hispanic","other"), "Otros", datos$race)
+datos$race[datos$race=="2"]<-"Black"
+datos$race[datos$race=="5"]<-"White"
+
+datos$race <- ifelse(is.na(datos$race), "Falta_r", datos$race)
+datos$race[datos$race=="1"]<-"Black"
+datos$race[datos$race=="2"]<-"Otro"
+datos$race[datos$race=="3"]<-"White"
+datos$race <- ifelse(datos$race %in% c("Falta_r","Otros"),"Otro", datos$race)
+
+datos$income <- ifelse(datos$income %in% c("$25-$50k",">$50k"), ">$25k", datos$income)
+datos$income[datos$income=="4"]<-"under $11k"
+datos$income[datos$income=="1"]<-"$11-$25k"
+
+datos <- datos %>%
+  mutate(age = case_when(
+    age <= 50 ~ " < 50",
+    age > 50 & age <60 ~ "50 - 60",
+    age >= 60 & age < 70 ~ " 60 - 70",
+    age >= 70 ~ " > 70"
+  ))
+
+datos <- datos %>%
+  mutate(edu = case_when(
+    edu < 10 ~ "< 10",
+    edu >= 10 & edu <13 ~ "10 - 13",
+    edu >= 13  ~ "> 13"
+  ))
+
+datos$numco <- factor(datos$numco, 
+                      levels = c(0, 1, 2, 3:9), 
+                      labels = c("Ninguna", "1", "2", rep("+3", 7)))
+
+categoricas1 <- c("age","edu","race","income","numco")
+datos[, categoricas1] <- lapply(datos[, categoricas1], factor)
+
+par(las =3, mfrow=c(2,3), mai=c(0.6,0.5,0.2,0.1))
+for (variable in categoricas1) {
+  conteo <- table(datos[[variable]])
+  text(x = barplot(conteo, col = coul, main = variable), y = conteo, labels = conteo, pos = 3, cex = 0.8, col = "blue")
+  xlab=colnames(datos[[variable]])
+}
+
+n <- nrow(datos)
+```
+
+-   Relación Costos-Cargo (*totcst*): Se configura de manera que en dólares esta relación sea así: "menor a 4000", "entre 4000 y 8000", "8000 y 16000" junto con "más de 40000 dólares".
+
+```{r}
+# Recodificaión de datos
+# recodificación de datos
+datos <- datos %>%
+  mutate(totcst = case_when(
+    totcst <= 4000 ~ "< 4000",
+    totcst >= 4000 & totcst < 8000 ~ "4000-8000",
+    totcst >= 8000 & totcst < 16000 ~ "8000-16000",
+    totcst >= 16000 & totcst < 40000 ~ "16000-40000",
+    totcst >= 40000 ~ "> 40000"
+  ))
+
+datos$adlp <- ifelse(datos$adlp %in% c("2","3","4","5","6","7"),"+2", datos$adlp)
+
+datos$adls <- ifelse(datos$adls %in% c("2","3","4"),
+                      "2 - 4", ifelse(datos$adls %in%                                c("5","6","7"),"5 - 7", datos$adls))
+
+
+categoricas4 <- c("adlp","adls","sfdm2","totcst")
+datos[, categoricas4] <- lapply(datos[, categoricas4], factor)
+
+par(las =3, mfrow=c(2,2), mai=c(0.6,0.5,0.2,0.1))
+for (variable in categoricas4) {
+  conteo <- table(datos[[variable]])
+  text(x = barplot(conteo, col = coul, main = variable), y = conteo, labels = conteo, pos = 3, cex = 0.8, col = "blue")
+  xlab=colnames(datos[[variable]])
+}
+
+
+# recodificación de NA
+datos$race <- ifelse(is.na(datos$race), "Falta_r", datos$race)
+datos$race[datos$race=="1"]<-"Black"
+datos$race[datos$race=="2"]<-"Otro"
+datos$race[datos$race=="3"]<-"White"
+
+
+datos$income <- ifelse(is.na(datos$income), "Falta_i", datos$income)
+datos$income[datos$income=="1"]<-"$11k - $25k"
+datos$income[datos$income=="2"]<-"> $25k"
+datos$income[datos$income=="3"]<-"< $11k"
+
+datos$edu <- ifelse(is.na(datos$edu), "Falta_e", datos$edu)
+datos$edu[datos$edu=="1"]<-"<10A"
+datos$edu[datos$edu=="2"]<-">13A"
+datos$edu[datos$edu=="3"]<-"10A-13A"
+
+datos$dnr <- ifelse(is.na(datos$dnr), "Falta_d", datos$dnr)
+datos$dnr[datos$dnr=="1"]<-"after sadm"
+datos$dnr[datos$dnr=="2"]<-"before sadm"
+datos$dnr[datos$dnr=="3"]<-"No dnr"
+datos$dnr <- ifelse(datos$dnr %in% c("Falta_d","No dnr"),"No dnr", datos$dnr)
+
+datos$adlp <- ifelse(is.na(datos$adlp), "Falta_ap", datos$adlp)
+datos$adlp[datos$adlp=="1"]<-"+2"
+datos$adlp[datos$adlp=="2"]<-"0"
+datos$adlp[datos$adlp=="3"]<-"1"
+
+datos$adls <- ifelse(is.na(datos$adls), "Falta_as", datos$adls)
+datos$adls[datos$adls=="1"]<-"0"
+datos$adls[datos$adls=="2"]<-"1"
+datos$adls[datos$adls=="3"]<-"2 - 4"
+datos$adls[datos$adls=="4"]<-"5 - 7"
+
+datos$sfdm2 <- ifelse(is.na(datos$sfdm2), "Falta_s", datos$sfdm2)
+datos$sfdm2[datos$sfdm2=="1"]<-"<2 mo. follow up"
+datos$sfdm2[datos$sfdm2=="2"]<-"ald >=4(>=5 if sur)"
+datos$sfdm2[datos$sfdm2=="3"]<-"coma or intub"
+datos$sfdm2[datos$sfdm2=="4"]<-"no(M2 and SIP pres)"
+datos$sfdm2[datos$sfdm2=="5"]<-"SIP >= 30"
+
+datos$totcst <- ifelse(is.na(datos$totcst), "Falta_t", datos$totcst)
+datos$totcst[datos$totcst=="1"]<-"<4000"
+datos$totcst[datos$totcst=="2"]<-">40000"
+datos$totcst[datos$totcst=="3"]<-"16000-40000"
+datos$totcst[datos$totcst=="4"]<-"4000-8000"
+datos$totcst[datos$totcst=="5"]<-"8000-16000"
+
+categoricas2 <- c("race","income","edu","dnr","adlp","adls","sfdm2","totcst")
+datos[, categoricas2] <- lapply(datos[, categoricas2], factor)
+
+categoricas3 <- c("sex","race","income","death","hospdead",
+                  "age","edu","numco","dzclass",
+       "dnr","adlp","adls","sfdm2","totcst","diabetes","dementia", "ca")
+
+datc_fin <- as.data.frame(datos[,categoricas3])
+```
+
+Se escogen como variables activas aquellas del componente de salud y demografía, que incluyen: Género, Raza, Salario, Muerte, Muerte en el hospital, Edad, Educación y Relación cargo-costo, teniendo en cuenta el propósito de los objetivos planteados.
+
+Por su parte, se tendrán como suplementarias: Categoría de enfermedad, Orden de no reanimación, Índices de actividades de la vida diaria registradas por paciente y por un sustituto, Nivel de discapacidad del paciente, Diabetes, Demencia, Cáncer y Número de comorbilidades.
+
+Se realiza una codificación de las variables de raza, agrupando "Otros" con datos faltantes debido a que el estudio podría cambiar. Además, para "dnr" también hubo un cambio en el que se supone que aquellos datos faltantes aquí se utilizarán como si no tuvieran orden de no reanimación; debido a que se asume su obligatoriedad en esta investigación.
+
+```{r, include=FALSE}
+MCA1<-MCA(datc_fin,quali.sup=c(8,9,10,11,12,13,15,16,17),graph=FALSE)
+```
+
+```{r}
+plot1 <- fviz_screeplot(MCA1, addlabels = TRUE, ylim = c(0, 20)) +
+  theme_minimal()
+
+# Crear el segundo gráfico como un gráfico de barras
+s <- 10
+l <- MCA1$eig[MCA1$eig[,1] > 1/s, 1]
+tau <- ( s / (s - 1) )^2 * ( l - (1/s) )^2
+ptau <- tau / sum( tau ) * 100
+
+plot2 <- ggplot(data.frame(x = seq_along(ptau), y = ptau), aes(x, y)) +
+  geom_bar(stat = "identity", fill = "darkred") +
+  ylim(0, 75) +
+  theme_minimal()
+
+# Usar patchwork para combinar los gráficos
+combined_plot <- plot1 + plot2 + 
+  plot_layout(ncol = 2, nrow = 1, widths = c(1, 1))
+
+# Mostrar el gráfico combinado
+combined_plot
+```
+
+Con el criterio de Benzécri se escogen 4 ejes para representar las variables.
+
+## Ejes 1 y 2
+
+Dados el primer y segundo eje, las variables mejor representadas son: educación, salario y muerte en el hospital (mejor en el 1). Por su parte, entre las variables ilustrativas se encuentra el nivel de discapacidad.
+
+```{r}
+kable(MCA1$var$eta2)
+plot.MCA(MCA1, choix='var')
+```
+
+<details>
+
+<summary>Valores Test Suplementarias</summary>
+
+```{r}
+kable(MCA1$quali.sup$v.test)
+```
+
+</details>
+
+Respecto a las variables de salud y demografía en el eje 1, las categorías que más contribuyen son aquellas con valores faltantes en salario y educación. Además, en menor medida, muerte en el hospital y si vivió o murió durante el estudio. Por tanto, este eje se denominará **Datos faltantes y muerte VS supervivencia.**
+
+```{r, warning=FALSE}
+plot.MCA(MCA1,invisible= c('ind','quali.sup'),cex=0.85,cex.main=0.85,cex.axis=0.85,label =c('var'))
+fviz_contrib(MCA1, choice = "var", axes = 1)
+```
+
+En cuanto al eje 2, las categorías que más contribuyen son los extremos de salario con menos de 11000 dólares y más de 25000 dólares, y los extremos de educación con menor de 10 años y mayor de 13 años de educación, en menor medida los extremos de edad que son (menor a 50 años y mayor a 70 años) y relación cargo-costos con más de 40000. A partir de esto nombramos al eje **Extremos de salario y educación.**
+
+```{r, warning=FALSE}
+fviz_contrib(MCA1, choice = "var", axes = 2)
+fviz_mca_var(MCA1, col.var = "cos2", repel = TRUE, 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             ggtheme = theme_minimal(),
+             select.var = list(cos2 = 0.05))
+```
+
+Algunas relaciones que se pueden observar son:
+
+-   Personas con más de 13 años de estudio que ganan más de 25000 dólares, ya que usualmente el salario y los años de educación van correlacionados, por otra parte, personas con menos de 10 años de educación y salario menores a 11000 dólares también muestran cierto grado de "relación".
+
+-   Personas vivas, con índice de 0 en actividades registradas por el paciente y sustituto, junto con el no avance de la enfermedad en el segundo mes, con un salario de entre 11000 y 25000 dólares. Dado que esta relación muestra que el paciente no empeoró en los primeros 2 meses de estudio la explicación más plausible respecto a que el índice de las actividades de la vida diaria sea 0 (persona totalmente dependiente del personal médico) es un buen cuidado médico durante la estancia aunque no se descarta la posibilidad de registros erróneos.
+
+-   Individuos muertos en el hospital con la categoría de datos faltantes en salario y menos de 2 meses de seguimiento en el estudio, atribuidos a que estos pacientes fallecieron antes del registro de datos de salario, que se negaron a darlos o simplemente no estaban en la base de datos del hospital.
+
+-   Pacientes muertos con datos faltantes en actividades de la vida diaria registradas por paciente y por un sustituto con orden de no reanimación después de la admisión, esto se explica porque toman los datos periódicamente y al morir el paciente no se registra su último valor teniendo en cuenta que no solicito reanimación.
+
+-   Pacientes con Cirrosis/Insuficiencia Cardiaca Congestiva/Enfermedad pulmonar obstructiva crónica con relación cargos-costo de menor a 8000 dólares, el tratamiento usual es cambios en el estilo de vida a menos que la enfermedad esté en etapas avanzadas, por lo tanto, estos gastos podrían referirse a medicamentos para tratarlas.
+
+## EJES 3 Y 4
+
+En el eje 3, las variables mejor representadas son muerte y edad; por su parte, el eje 4 tiene a muerte en el hospital, raza y relación cargo-costos.
+
+```{r, warning=FALSE}
+plot.MCA(MCA1, axes = c(3, 4), choix='var')
+```
+
+```{r, warning=FALSE}
+plot.MCA(MCA1,invisible= c('ind','quali.sup'),cex=0.85,cex.main=0.85,cex.axis=0.85,label =c('var'), axes = c(3, 4))
+fviz_contrib(MCA1, choice = "var", axes = 3)
+```
+
+En el eje 3, lo que más contribuyen son las categorías: sobrevivió y murió de la variable muerte, personas menores de 50 años, raza negra y falta de educación y salario. Además, teniendo en cuenta las coordenadas y las interpretaciones de los 2 primeros ejes, al tercer eje lo denominaremos **Minorías raciales y género femenino vs hombres blancos,** con mención especial a los datos faltantes de la categoría de educación y salario.
+
+```{r}
+fviz_contrib(MCA1, choice = "var", axes = 4)
+```
+
+En cuanto al eje 4, las categorías que más contribuyen son si murió o no en el hospital, raza negra, con salarios menores a 11000 dólares y datos faltantes en ingresos y educación, con los extremos de la relación cargo-costos menos de 4000 y más de 40000. Este eje lo denominaremos **Cobros altos vs cobros bajos,** esto teniendo en cuenta las otras interpretaciones posibles de los ejes.
+
+```{r}
+fviz_mca_var(MCA1, axes = c(3, 4), col.var = "cos2", repel = TRUE, 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             ggtheme = theme_minimal(),
+             select.var = list(cos2 = 0.05))
+```
+
+Algunas relaciones que se pueden identificar son:
+
+-   Personas de raza negra u otras y menores de 50 años, una posible explicación se atribuye al contexto de los 90s en Estados Unidos, donde se presenta desigualdad racial constante.
+
+-   Personas vivas, junto con las categorías de datos faltantes en salario, nivel de discapacidad del paciente y educación, puede deberse a que el paciente no requería el seguimiento continuo y tampoco quiso compartir sus datos personales.
+
+-   Otra relación son pacientes masculinos blancos con cáncer mayores a 70 años con una relación de cargo-costos menor a 4000 dólares y un salario de más de 25000 dólares, una razón atribuible es que dado su salario podían costearse un seguro médico, lo que cubría parte del costo del tratamiento dada la gravedad de la enfermedad y la avanzada edad que tenían.
+
+-   Pacientes sin orden de no reanimación ni avance en la gravedad de la enfermedad a los 2 meses, quienes no murieron en el hospital con datos faltantes registrados por un sustituto en actividades de la vida diaria, probablemente porque desde un inicio se diagnosticaron enfermedades no terminales tratables a tiempo en el periodo de estudio.
+
+-   Individuos que fallecieron durante el estudio, quienes firmaron orden de no reanimación después de la admisión al hospital y estudio con un periodo de seguimiento menor a 2 meses, atribuido a enfermedades en estados críticos.
+
+-   Pacientes femeninos quienes tenían 10 a 13 años de estudio con tratamiento de Ablación por radiofrecuencia y Falla sistemática múltiple en órganos con salarios menores a 11000 dólares, con una relación cargo-costos mayor a 40000 y esto podría ser dado tumores malignos, posiblemente cancerígenos, provocando que el tratamiento influya en el deterioro de los órganos, quienes omitieron estudios o diagnósticos por un tiempo extenso teniendo en cuenta que este tratamiento puede ser bastante costoso, agregado a un contexto no favorable para las mujeres en los 90 con salarios bajos dado el nivel de educación y otros factores externos.
+
+## Conclusiones ACM
+
+Teniendo en cuenta los objetivos propuestos inicialmente, se puede resumir así:
+
+-   A partir de las interpretaciones anteriores, se pudieron encontrar algunos patrones entre las características sociodemograficas y aquellas en seguimiento de casos junto con enfermedades. Como que la gran mayoría de personas a pesar de estar en estado crítico al inicio del estudio firmaron el consentimiento de no reanimación hasta después de admitidos al estudio, personas con enfermedades en estado avanzado pagaban altos cargos médicos con salarios bajos entre las que destacaban las minorías (mujeres, raza negras y otras).
+
+-   Los datos faltantes resaltaban en la mayoría de los ejes, lo que impidió una apropiada identificación de patrones, por otra parte, se esperaba mejores resultados referente a las enfermedades tratadas en el estudio, pero en análisis de correspondencia múltiples no arrojo detalles suficientes para resaltar esto, además las comorbilidades no fueron un factor decisivo en el estudio, en contraste la edad si fue una variable importante, ya que estuvo involucrada en distintas relaciones de los ejes dados.
+
+-   Dado el contexto de los años 90s en Estados Unidos durante el estudio, los resultados reflejan que las minorías agrupan condiciones menos favorables, marcando la desigualdad contra el hombre promedio estadounidense; con los resultados obtenidos podría haber sido posible implementar mejores programas para los pacientes gravemente hospitalizados y clasificar de una manera más eficaz y eficiente a los pacientes en riesgo alto, medio y bajo evitando tiempos prolongados añadidos a costos exagerados.
+
+# Clustering
+
+Se inicia el proceso de agrupamiento así:
+
+```{r, output=FALSE}
+datos <- read_csv("datos.csv")
+
+categoricas <- c("death","sex","hospdead","dzgroup","dzclass","income","race","ca","dnr","sfdm2","diabetes","dementia","num.co",
+                 "scoma")
+
+names(datos)[names(datos) == "d.time"] <- "dtime"
+
+datos[, categoricas] <- lapply(datos[, categoricas], factor)
+coul <- brewer.pal(11, "Set3")
+
+names(datos)[names(datos) == "num.co"] <- "numco"
+
+datos$race <- ifelse(datos$race %in% c("asian","hispanic","other"), "Otros", datos$race)
+datos$race[datos$race=="2"]<-"Black"
+datos$race[datos$race=="5"]<-"White"
+
+datos$income <- ifelse(datos$income %in% c("$25-$50k",">$50k"), ">$25k", datos$income)
+datos$income[datos$income=="4"]<-"under $11k"
+datos$income[datos$income=="1"]<-"$11-$25k"
+
+datos <- datos %>%
+  mutate(age = case_when(
+    age <= 50 ~ " < 50",
+    age > 50 & age <60 ~ "50 - 60",
+    age >= 60 & age < 70 ~ " 60 - 70",
+    age >= 70 ~ " > 70"
+  ))
+
+datos <- datos %>%
+  mutate(edu = case_when(
+    edu < 10 ~ "< 10",
+    edu >= 10 & edu <13 ~ "10 - 13",
+    edu >= 13  ~ "> 13"
+  ))
+
+datos$numco <- factor(datos$numco, 
+                      levels = c(0, 1, 2, 3:9), 
+                      labels = c("Ninguna", "1", "2", rep("+3", 7)))
+
+categoricas1 <- c("age","edu","race","income","numco")
+datos[, categoricas1] <- lapply(datos[, categoricas1], factor)
+
+n <- nrow(datos)
+
+# recodificación de datos
+datos <- datos %>%
+  mutate(totcst = case_when(
+    totcst <= 4000 ~ "< 4000",
+    totcst >= 4000 & totcst < 8000 ~ "4000-8000",
+    totcst >= 8000 & totcst < 16000 ~ "8000-16000",
+    totcst >= 16000 & totcst < 40000 ~ "16000-40000",
+    totcst >= 40000 ~ "> 40000"
+  ))
+
+datos$adlp <- ifelse(datos$adlp %in% c("2","3","4","5","6","7"),"+2", datos$adlp)
+
+datos$adls <- ifelse(datos$adls %in% c("2","3","4"),
+                      "2 - 4", ifelse(datos$adls %in%                                c("5","6","7"),"5 - 7", datos$adls))
+
+
+categoricas4 <- c("adlp","adls","sfdm2","totcst")
+datos[, categoricas4] <- lapply(datos[, categoricas4], factor)
+
+# recodificación de NA
+datos$race <- ifelse(is.na(datos$race), "Falta_r", datos$race)
+datos$race[datos$race=="1"]<-"Black"
+datos$race[datos$race=="2"]<-"Otro"
+datos$race[datos$race=="3"]<-"White"
+datos$race <- ifelse(datos$race %in% c("Falta_r","Otro"),"Otro", datos$race)
+
+datos$income <- ifelse(is.na(datos$income), "Falta_i", datos$income)
+datos$income[datos$income=="1"]<-"$11k - $25k"
+datos$income[datos$income=="2"]<-"> $25k"
+datos$income[datos$income=="3"]<-"< $11k"
+
+datos$edu <- ifelse(is.na(datos$edu), "Falta_e", datos$edu)
+datos$edu[datos$edu=="1"]<-"<10A"
+datos$edu[datos$edu=="2"]<-">13A"
+datos$edu[datos$edu=="3"]<-"10A-13A"
+
+datos$dnr <- ifelse(is.na(datos$dnr), "Falta_d", datos$dnr)
+datos$dnr[datos$dnr=="1"]<-"after sadm"
+datos$dnr[datos$dnr=="2"]<-"before sadm"
+datos$dnr[datos$dnr=="3"]<-"No dnr"
+datos$dnr <- ifelse(datos$dnr %in% c("Falta_d","No dnr"),"No dnr", datos$dnr)
+
+datos$adlp <- ifelse(is.na(datos$adlp), "Falta_ap", datos$adlp)
+datos$adlp[datos$adlp=="1"]<-"+2"
+datos$adlp[datos$adlp=="2"]<-"0"
+datos$adlp[datos$adlp=="3"]<-"1"
+
+datos$adls <- ifelse(is.na(datos$adls), "Falta_as", datos$adls)
+datos$adls[datos$adls=="1"]<-"0"
+datos$adls[datos$adls=="2"]<-"1"
+datos$adls[datos$adls=="3"]<-"2 - 4"
+datos$adls[datos$adls=="4"]<-"5 - 7"
+
+datos$sfdm2 <- ifelse(is.na(datos$sfdm2), "Falta_s", datos$sfdm2)
+datos$sfdm2[datos$sfdm2=="1"]<-"<2 mo. follow up"
+datos$sfdm2[datos$sfdm2=="2"]<-"ald >=4(>=5 if sur)"
+datos$sfdm2[datos$sfdm2=="3"]<-"coma or intub"
+datos$sfdm2[datos$sfdm2=="4"]<-"no(M2 and SIP pres)"
+datos$sfdm2[datos$sfdm2=="5"]<-"SIP >= 30"
+
+datos$totcst <- ifelse(is.na(datos$totcst), "Falta_t", datos$totcst)
+datos$totcst[datos$totcst=="1"]<-"<4000"
+datos$totcst[datos$totcst=="2"]<-">40000"
+datos$totcst[datos$totcst=="3"]<-"16000-40000"
+datos$totcst[datos$totcst=="4"]<-"4000-8000"
+datos$totcst[datos$totcst=="5"]<-"8000-16000"
+
+categoricas2 <- c("race","income","edu","dnr","adlp","adls","sfdm2","totcst")
+datos[, categoricas2] <- lapply(datos[, categoricas2], factor)
+
+categoricas4 <- c("sex","race","income","death","hospdead",
+                  "age","edu","totcst","numco","dzclass", "avtisst",
+                  "adlp","adls","sfdm2","diabetes","dementia", "ca","dnr",
+                  "hday","surv2m","surv6m")
+
+datc_fin2 <- as.data.frame(datos[,categoricas4])
+
+dats2 <- sqldf("select  sex,race,income,death,hospdead,
+                  age,edu,totcst,numco,dzclass,avtisst,
+                  adlp,adls,sfdm2,diabetes,dementia,ca,dnr,
+                  hday,surv2m,surv6m
+       from     datc_fin2
+       where    surv2m is not null  and surv6m is not null and 
+                avtisst is not null and hday is not null")
+
+Y <- dats2[, c("sex","race","income","death","hospdead",
+               "age","edu","totcst","numco","dzclass")] # activas
+```
+
+Para la clasificación de individuos se van a trabajar con los objetivos:
+
+\- Clasificar a los pacientes hospitalizados en grupos o categorías en función de los resultados, utilizando las variables socio-demográficas, de estado de salud y de enfermedades.
+
+\- Clasificar a los pacientes en grupos de riesgo bajo, moderado y alto en función de la mortalidad a lo largo del estudio.
+
+Teniendo en cuenta lo anterior, se van a usar para las variables activas las cualitativas. Son aquellas pertenecientes al grupo de salud y demografía junto con número de comorbilidades y categoría de la enfermedad.
+
+Siguiendo la estrategia completa de agrupamiento propuesta en clase, se proponen dos agrupamientos distintos siguiendo cada uno de los objetivos.
+
+La variable "Sfdm2" la categoría coma no se recodificó debido a que se considera que tiene mayor utilidad de esta forma para la interpretación en el estudio.
+
+En cuanto a otras categorías de datos faltantes, no hubo más recategorización, puesto que poseen la suficiente información para que sean su propia categoría sin necesidad de eliminar datos.
+
+## Objetivo 1
+
+```{r}
+set.seed(13)
+k1 <- FactoClass(Y, dudi.acm, dats2[, c("avtisst",
+                                        "adlp","adls","sfdm2","diabetes","dementia", "ca","dnr",
+                                        "hday","surv2m","surv6m")], scanFC = FALSE, nf = 25, nfcl = 25,k.clust = 6)
+```
+
+![](PROYECTO-FINAL-DEF_files\figure-html\aa.png){fig-align="center" width="55%"} ![](PROYECTO-FINAL-DEF_files\figure-html\bb.png){fig-align="center" width="55%"}
+
+A partir de estas gráficas se realiza agrupación por 6 clústers.
+
+```{r}
+kable(k1$clus.summ[, 1:4])
+```
+
+```{r}
+plotFactoClass(k1, x=1, y=2, cex.col=0.8,
+               roweti="", infaxes="no", cstar=0)
+```
+
+Este es el gráfico de los clusters. Cuando se buscó realizar en otros ejes, no se encontró una mejor proyección, en consecuencia nos decantamos por mostrar este.
+
+### Grupo 1
+
+```{r}
+res.MCA<-MCA(dats2,ncp=25,quanti.sup=c(11,19,20,21),quali.sup=c(12,13,14,15,16,17,18),graph=FALSE)
+res.HCPC<-HCPC(res.MCA,nb.clust=6,consol=TRUE,graph=FALSE)
+datos_filtrados <- res.HCPC$desc.var$category[[1]]
+datos_filtrados1 <- res.HCPC$desc.var$quanti[[1]]
+kable(datos_filtrados[1:7, "v.test"])
+kable(datos_filtrados1[1:2, "v.test"])
+```
+
+Este primer grupo contiene las categorías de Cirrosis/Enfermedad pulmonar obstructiva/Insuficiencia cardiaca, más de 3 comorbilidades, personas que sobrevivieron en el hospital, salarios menores a 11000 dólares, estimaciones de supervivencia por el modelo SUPPORT de 2 y 6 meses, educación menor a 10 años, sin presencia de enfermedad en el segundo mes y no hay impacto en el perfil de la enfermedad, cargo-costos menor a 8000 dólares y aquellos que no tienen cáncer. Esto puede ser porque son personas con salarios bajos debido a su nivel de educación, pero a pesar de esto sus costos hospitalarios no son excesivamente altos, puede ser debido a que las enfermedades mencionadas son tratables sin un costo desmedido y por todo esto la enfermedad no progresa gravemente en el estudio provocando que las estimaciones le den una alta probabilidad de supervivencia; además de esto las personas tienen un número de comorbilidades altos en comparación a la media.
+
+### Grupo 2
+
+```{r}
+datos_filtrados2 <- res.HCPC$desc.var$category[[2]][res.HCPC$desc.var$category[[2]][, "v.test"] > 9.5, ]
+kable(datos_filtrados2[, "v.test"])
+
+```
+
+Esta agrupación de pacientes posee las siguientes categorías: Cáncer metastásico, con la categoría de enfermedad cáncer, cargos-costo menor a 8000, con una sola comorbilidad, fallecieron en el estudio, pero no en el hospital, no tienen diabetes, actividades de la vida diaria 0 y raza blanca.
+
+Esto agrupa personas enfermas de cáncer en estado avanzado, que tienen un costo bajo a pesar de la enfermedad que poseen; a pesar de eso, su índice de la vida diaria refleja que eran pacientes completamente dependientes, pero no se descarta una inadecuada clasificación en esta categoría. Y finalmente, debido a la enfermedad que tenían, es una agrupación donde se muestra que varios de estos fallecieron y no necesariamente en el hospital durante el tiempo de estudio. Además, la agrupación de estos pacientes no presenta la enfermedad de diabetes. Y, al parecer, se caracteriza por ser de raza blanca.
+
+### Grupo 3
+
+```{r}
+datos_filtrados3 <- res.HCPC$desc.var$category[[3]][res.HCPC$desc.var$category[[3]][, "v.test"] > 2.5, ]
+kable(datos_filtrados3[, "v.test"])
+a <- c("avtisst")
+datos_filtrados4 <- res.HCPC$desc.var$quanti[[3]]
+kable(cbind(a, datos_filtrados4[,"v.test"]))
+
+```
+
+Este agrupamiento está caracterizado por datos faltantes en relación cargos-costo, con enfermedad de Ablación por radiofrecuencia/ Falla sistemática múltiple en órganos, raza negra, sobrevivieron en el tiempo de estudio, con un índice de TISS alto, con actividades de la vida diaria registradas por un sustituto de 0, sin comorbilidades, menor a 50 años, con datos faltantes en actividades registradas por el paciente y no tienen demencia.
+
+Esta agrupación tiende a valorar más aquellos pacientes con Ablación por radiofrecuencia en vez de la falla múltiple, ya que los pacientes sobrevivieron durante el estudio; sin embargo, están en estado crítico, ya que su nivel de TISS es elevado y son dependientes a realizar actividades. Por otra parte, son personas de las más jóvenes en el estudio, de raza negra y sin demencia, posiblemente dado que su edad ayuda a no poseer comorbilidades ni enfermedades mentales. Y se puede suponer que no quisieron compartir información de su pago en relación con el tratamiento, ya que son datos sensibles.
+
+### Grupo 4
+
+```{r}
+datos_filtrados5 <- res.HCPC$desc.var$category[[4]][res.HCPC$desc.var$category[[4]][, "v.test"] > 2.5, ]
+kable(datos_filtrados5[, "v.test"])
+
+datos_filtrados6 <- res.HCPC$desc.var$quanti[[4]]
+kable(cbind( datos_filtrados6[,"v.test"]))
+
+
+```
+
+Estos pacientes presentan una agrupación de categorías tales como: Otro en raza, menor a 50 años, con número elevado de días de estancia en el hospital, con cargo-costos mayor a 40000, con datos faltantes en actividades de la vida diaria registradas por un sustituto, sin demencia, en estado coma o intubado, con un puntaje de TISS elevado y con datos faltantes en educación y salario.
+
+Son personas que, al estar en coma o intubadas, tienen una relación de costos elevados, además de que no poseen información completa en algunas variables socio-demográficas y requieren un constante apoyo del personal médico. Debido a que son minorías étnicas, puede que no tengan familiares o un sustituto que pueda acompañarlo y registrar estos valores, y finalmente, al ser pacientes jóvenes, no han desarrollado enfermedades tales como demencia.
+
+### Grupo 5
+
+```{r}
+datos_filtrados7 <- res.HCPC$desc.var$category[[5]][res.HCPC$desc.var$category[[5]][, "v.test"] > 11, ]
+datos_filtrados8 <- res.HCPC$desc.var$quanti[[5]] 
+kable(datos_filtrados7[, "v.test"])
+
+kable(datos_filtrados8[1:2, "v.test"] )
+
+```
+
+Esta agrupación de pacientes contiene las siguientes categorías: Ablación por radiofrecuencia/ Falla sistemática múltiple, con cargo-costos \> 16000, puntaje de TISS alto, datos faltantes en índice de actividades diarias registradas por el paciente, número elevado de días de estancia en el hospital, fallecieron en el hospital, sin comorbilidades, con cáncer y con un seguimiento menor a 2 meses.
+
+Son pacientes con falla sistemática múltiple quienes son caracterizados por requerir constantemente apoyo del personal médico y junto con una gran cantidad de días de estancia; esto automáticamente incrementa el costo médico, pero aun teniendo en cuenta esto su periodo de seguimiento fue menor a 2 meses, ya que fallecieron dejando así datos incompletos registrados por el propio paciente. Además, se caracterizaban por tener cáncer.
+
+### Grupo 6
+
+```{r}
+datos_filtrados9 <- res.HCPC$desc.var$category[[6]][res.HCPC$desc.var$category[[6]][, "v.test"] > 6, ]
+datos_filtrados10 <- res.HCPC$desc.var$quanti[[6]]
+kable(datos_filtrados9[, "v.test"])
+
+kable(cbind(a, datos_filtrados10[1,"v.test"]))
+
+
+```
+
+Está caracterizado por: categoría de la enfermedad "coma", con datos faltantes en actividades de la vida diaria registradas por el paciente, fallecieron en el hospital, tenían orden de no reanimación después de entrar al estudio, con menos de 2 meses de seguimiento, sin comorbilidades, con un puntaje de TISS alto, sin cáncer, murieron durante el estudio y con datos faltantes en educación.
+
+Se identificaba por pacientes en coma quienes necesitaban constante apoyo médico lo que elevaba el puntaje de TISS, quienes fallecieron en el hospital y, por tanto, en el estudio, lo que lleva a tener menos de 2 meses de seguimiento ocasionando que alguna persona firmara una orden de no reanimación después de haber ingresado al estudio.
+
+No tenían cáncer y, por lo tanto, sin comorbilidades y, debido a su condición, no tienen los datos socio-demográficos completos.
+
+## Objetivo 2
+
+Se realiza un respectivo agrupamiento para cumplir con el objetivo de: Clasificar a los pacientes en grupos de riesgo bajo, moderado y alto en función de la mortalidad a lo largo del estudio. Obteniendo así información solo en 3 grupos.
+
+![](PROYECTO-FINAL-DEF_files\figure-html\a3.png){fig-align="center" width="55%"}
+
+### Grupo de riesgo alto
+
+```{r}
+res2.MCA<-MCA(dats2,ncp=25,quanti.sup=c(11,19,20,21),quali.sup=c(12,13,14,15,16,17,18),graph=FALSE)
+res2.HCPC<-HCPC(res2.MCA,nb.clust=3,consol=TRUE,graph=FALSE)
+datos_filtrados15 <- res2.HCPC$desc.var$category[[3]]
+datos_filtrados16 <- res2.HCPC$desc.var$quanti[[3]]
+kable(datos_filtrados15[1:12, "v.test"])
+a <- c("avtisst")
+kable(cbind(a, datos_filtrados16[1,"v.test"]))
+
+```
+
+Este grupo está caracterizado por: Pacientes en coma, con datos faltantes en actividades diarias registradas por el paciente, fallecieron en el hospital y en el estudio, con menos de 2 meses de seguimiento, firmaron orden de no reanimación después de ingresar al estudio, sin comorbilidades, puntaje de TISS alto, sin cáncer, con datos faltantes en educación, cargo-costos entre 16000-40000 dólares, con demencia y de sexo femenino.
+
+Estos pacientes son los que tienen mayor riesgo de mortalidad debido a que al estar en coma no se les puede proporcionar un seguimiento constante en este estudio y debido a la incertidumbre del estado, los médicos no pueden actuar más allá de un diagnóstico inicial en los meses de investigación. Al contener esta agrupación ambas categorías de muerte, se vuelve una consecuencia de estar en riesgo alto. El hecho de necesitar un apoyo constante del personal médico, de no tener los datos completos en las variables socio-demográficas y de firmar una orden de no reanimación después de ingresar al estudio son condicionantes que elevan el riesgo de muerte. Además, de pertenecer al sexo femenino y de tener demencia en comparación a su contraparte, eleva el riesgo de mortalidad.
+
+### Grupo de riesgo medio
+
+```{r}
+
+datos_filtrados11 <- res2.HCPC$desc.var$category[[1]][res2.HCPC$desc.var$category[[1]][, "v.test"] > 9, ]
+datos_filtrados12 <- res2.HCPC$desc.var$quanti[[1]][res2.HCPC$desc.var$quanti[[1]][, "v.test"] > 9, ]
+kable(datos_filtrados11[, "v.test"])
+kable(datos_filtrados12[, "v.test"])
+```
+
+Este grupo está caracterizado por: Tener Cáncer, Cirrosis/Enfermedad pulmonar obstructiva/Insuficiencia cardiaca, que no murieron en el hospital, cargos-costos menores a 8000 dólares, estimación de modelo de supervivencia a 2 y 6 meses con valores altos, cáncer metastásico, con índices de actividades de la vida diaria que varían desde ser completamente dependiente hasta ser independiente, más de 3 comorbilidades, sin impacto en el perfil de la enfermedad, no tienen orden de no reanimación y que pertenecen a la categoría de 60-70 años.
+
+Teniendo en cuenta que poseen enfermedades graves, pero que durante el estudio no existió un impacto significativo respecto al avance de la gravedad de la enfermedad, no eleva demasiado su riesgo de mortalidad. El hecho de tener distintos tratamientos puede aumentar la probabilidad de mejoría y de que realicen actividades diarias sin ayuda externa, además los pacientes consideraron ser reanimados en caso de emergencia y por su parte pertenecer a los 60-70 años puede aumentar la cantidad de comorbilidades de estos.
+
+### Grupo de riesgo bajo
+
+```{r}
+datos_filtrados13 <- res2.HCPC$desc.var$category[[2]]
+datos_filtrados14 <- res2.HCPC$desc.var$quanti[[2]][res2.HCPC$desc.var$quanti[[1]][, "v.test"] > 9, ]
+kable(datos_filtrados13[1:11, "v.test"])
+kable(datos_filtrados14[, "v.test"])
+```
+
+Esta agrupación contiene las siguientes categorías: Ablación por radiofrecuencia/Falla sistemática múltiple, cargos-costos mayores a 16000 dólares, puntaje de TISS alto, datos faltantes en actividades diarias registradas por el paciente, número elevado de días de estancia en el hospital, fallecieron en el hospital, sin comorbilidades, menores a 50 años, con cáncer o no, seguimiento menor a 2 meses y orden de no reanimación firmada después de ingresar al estudio.
+
+El hecho de no tener comorbilidades, de ser jóvenes, y de no tener datos en las actividades puede que disminuya el riesgo de mortalidad. Sin embargo, al ser un estudio de personas hospitalizadas, todos tienen un riesgo elevado y estas son las que menor riesgo poseen.
+
+## Conclusiones Clustering
+
+-   Contrario a los pensamientos iniciales sobre la Ablación/falla sistemática múltiple, al parecer no son factores determinantes para aumentar el riesgo de muerte, además la cantidad de comorbilidades sigue este mismo patrón. El hecho de haber muerto en el hospital parece tener más importancia que morir aún después de terminar el estudio. Por otra parte, tener cáncer parece no ser un factor significativo en la mortalidad durante el estudio.
+
+-   La edad es un factor que no aumenta el riesgo de muerte junto con enfermedades como la diabetes y la demencia. Al existir datos faltantes en los índices de actividades de la vida diaria, no permite asegurar cuál es su correcta interpretación y, por tanto, se atribuye a cada agrupación. La relación cargo-costo depende de la permanencia en el estudio, teniendo en cuenta los días que estuvo hospitalizado y si su enfermedad necesitaba cierto tipo de tratamientos.
+
+-   Existen agrupaciones para cada una de las categorías de dzclass("categoría de la enfermedad") permitiendo identificar qué patrones dados en el estudio son atribuidos a cada una de las enfermedades. El número de comorbilidades fueron tomadas como otras enfermedades fuera de los grupos de estas en dzclass.
+
+-   Se esperaba que el nivel de discapacidad fuera un factor más determinante en la agrupación de elementos tales como las categorías de: coma o intubación, funcional o con impacto significativo en la progresión de la enfermedad.
+
+# Bibliografia
+
+[SUPPORT prognostic model](https://pubmed.ncbi.nlm.nih.gov/7810938/)
+
+-   Study to Understand Prognoses and Preferences for Outcomes and Risks of Treatment (SUPPORT) and Hospitalized Elderly Longitudinal Project (HELP), 1989-1997
+
+[Valoracion vida diaria](https://www.samiuc.es/indice-katz-valoracion-actividades-vida-diaria/)
+
+[Albumina](https://medlineplus.gov/spanish/ency/article/003480.htm#:~:text=Resultados%20normales&text=El%20rango%20normal%20es%20de,a%2054%20g%2FL)
+
+[Bilirrubina](https://medlineplus.gov/spanish/pruebas-de-laboratorio/examen-de-bilirrubina-en-sangre/)
+
+[Creatinina](https://es.wikipedia.org/wiki/Creatinina)
+
+[Sodio en la sangre](https://medlineplus.gov/spanish/ency/article/003481.htm)
+
+[pH](https://medlineplus.gov/spanish/ency/article/003855.htm#:~:text=pH%20de%20sangre%20arterial%3A%207.38,2)
+
+[SUPPORT model](https://biostat.app.vumc.org/wiki/pub/Main/SupportDesc/SUPPORTmodels.pdf)
+
+[Apache III](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4893757/#:~:text=The%20APACHE%20III%20score%20consists,from%200%20to%20299%20points.)
+
+[SIP](https://www.physio-pedia.com/Sickness_Impact_Profile_(SIP))
+
+[Comorbilidad](https://nida.nih.gov/es/areas-de-investigacion/la-comorbilidad)
+
+[Demencia](https://www.who.int/es/news-room/fact-sheets/detail/dementia)
+
+[Cancer](https://www.cancer.gov/espanol/cancer/naturaleza/que-es)
+
+[Orden de no reanimacion](https://www.cancer.gov/espanol/publicaciones/diccionarios/diccionario-cancer/def/orden-de-no-reanimar)
+
+[Multiple Organ System Failure](https://www.kindredhospitals.com/our-services/ltac/conditions/multiple-organ-system-failure#:~:text=What%20Is%20Multiple%20Organ%20System,called%20multiple%20organ%20system%20failure.)
+
+[Cirrosis](https://medlineplus.gov/spanish/cirrhosis.html)
+
+[Escala coma glasgow](https://www.salud.mapfre.es/enfermedades/neurologicas/escala-coma-glasgow/)
